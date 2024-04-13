@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpHandler : MonoBehaviour
@@ -17,37 +15,41 @@ public class JumpHandler : MonoBehaviour
     private AnimationCurve curve;
     private float risingTime, fallingTime, maxTime;
 
-    void Start() {
+    void Start()
+    {
         risingTime = risingCurve[risingCurve.length - 1].time;
         fallingTime = fallingCurve[fallingCurve.length - 1].time;
     }
 
     void FixedUpdate()
     {
-        if (starting && (InputHandler.Instance.jump.released || Time.time - timeStamp > risingTime))
+        if (starting && (InputHandler.Instance.Jump.released || Time.time - timeStamp > risingTime))
             EndJump();
-        if (Time.time - timeStamp <= maxTime)     
+        if (Time.time - timeStamp <= maxTime)
             rbody.velocity = new Vector2(rbody.velocity.x, velocityScalar * curve.Evaluate(Time.time - timeStamp));
 
         if (rbody.velocity.y < -terminalVelocity)
             rbody.velocity = new Vector2(rbody.velocity.x, -terminalVelocity);
     }
 
-    public void StartJump() {
+    public void StartJump()
+    {
         timeStamp = Time.time;
         starting = true;
         curve = risingCurve;
         maxTime = risingTime;
     }
 
-    private void EndJump() {
+    private void EndJump()
+    {
         timeStamp = Time.time;
         starting = false;
         curve = fallingCurve;
         maxTime = fallingTime;
     }
 
-    public void ForceLanding() {
+    public void ForceLanding()
+    {
         starting = false;
         timeStamp = -100;
     }
