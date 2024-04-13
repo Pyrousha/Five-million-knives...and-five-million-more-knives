@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6020643896259977336}
   - component: {fileID: -7347165683731981234}
+  - component: {fileID: 4515881921648772602}
+  - component: {fileID: 574090274925074346}
   - component: {fileID: 4019304172779022861}
   - component: {fileID: 4353305034535547511}
   - component: {fileID: 8996698301689316301}
@@ -48,9 +50,135 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de26d349b0cdba44b9ea176c464b36b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
   rbody: {fileID: 8996698301689316301}
   ground: {fileID: 4019304172779022861}
+  movement: {fileID: 4515881921648772602}
+  jump: {fileID: 574090274925074346}
+--- !u!114 &4515881921648772602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50262658776906337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0195449282f6cbc44a973931aaa2d0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rbody: {fileID: 8996698301689316301}
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 12.524039
+      outSlope: 12.524039
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.045529798
+    - serializedVersion: 3
+      time: 0.2
+      value: 1
+      inSlope: -0.08950715
+      outSlope: -0.08950715
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.26324502
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  decelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -5.9773846
+      outSlope: -5.9773846
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.03311258
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: -0.47745678
+      outSlope: -0.47745678
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10264903
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &574090274925074346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50262658776906337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2063a5311c3fd48973c8d8297c3b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rbody: {fileID: 8996698301689316301}
+  velocityScalar: 20
+  terminalVelocity: 30
+  risingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.25
+      inSlope: -1.9576913
+      outSlope: -1.9576913
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.13191997
+    - serializedVersion: 3
+      time: 0.2
+      value: 1
+      inSlope: -0.32540017
+      outSlope: -0.32540017
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15720427
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fallingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.0000009730055
+      outSlope: -0.0000009730055
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.12251656
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: -7.5428886
+      outSlope: -7.5428886
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.052980125
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &4019304172779022861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,8 +264,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 20
+  m_Material: {fileID: 6200000, guid: 209c4280d0c7d02448c1df1b77641f6f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -146,7 +274,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &6587775393989263224
 GameObject:
