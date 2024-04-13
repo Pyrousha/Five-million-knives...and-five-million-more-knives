@@ -8,6 +8,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private JumpHandler jump;
 
     private bool grounded;
+
+    void Start() {
+        GameManager.Instance.CreateHitbox(new HitData())
+        .SetTeam(HitboxTeam.PLAYER)
+        .Build();
+    }
+
     void FixedUpdate()
     {
         grounded = ground.CheckGrounded();
@@ -38,5 +45,9 @@ public class PlayerController : MonoBehaviour
         }
 
         rbody.velocity = velocity;
+    }
+
+    public void OnHit(HitData data) {
+        Debug.Log("Yeouch!");
     }
 }
