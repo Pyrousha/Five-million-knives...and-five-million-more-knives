@@ -5,13 +5,13 @@ using UnityEngine.Events;
 
 public class HurtboxController : MonoBehaviour
 {
-    [SerializeField] private UnityAction<HitboxData> onHit;
-    public void FireOnHit(HitboxData data) {
+    [SerializeField] private UnityEvent<HitData> onHit;
+    [SerializeField] private HitboxTeam team;
+    public void FireOnHit(HitData data) {
         onHit.Invoke(data);
     }
 
-    public Transform GetOwner() {
-        return transform.parent;
+    public HitboxTeam GetTeam() {
+        return team;
     }
-
 }
