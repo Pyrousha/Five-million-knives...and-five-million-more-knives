@@ -10,14 +10,14 @@ public class RebindControlsMenu : Submenu
 {
     public enum InputID
     {
-        FORWARD,
-        BACK,
-        LEFT,
-        RIGHT,
+        MOVE_LEFT,
+        MOVE_RIGHT,
         JUMP,
-        FALL,
-        SHOOT,
-        KABOOM
+        ATTACK,
+        GRAPPLE,
+        INTERACT,
+        MENU,
+        SUMMON
     }
 
     [System.Serializable]
@@ -151,7 +151,7 @@ public class RebindControlsMenu : Submenu
         playerInput.SwitchCurrentActionMap("UI");
 
 
-        if (inputIndex <= (int)InputID.RIGHT)
+        if (inputIndex <= (int)InputID.MOVE_RIGHT)
         {
             rebindingOperation = currRebinding.Value.Action.action.PerformInteractiveRebinding(inputIndex + 1)
                 //.WithControlsExcluding("Mouse")
@@ -182,7 +182,7 @@ public class RebindControlsMenu : Submenu
 
         currRebinding = null;
 
-        playerInput.SwitchCurrentActionMap("Player");
+        playerInput.SwitchCurrentActionMap("Gameplay");
 
         StartCoroutine(ReloadRoutine());
     }
@@ -202,7 +202,7 @@ public class RebindControlsMenu : Submenu
         InputActionReference currAction = actionRef.Action;
 
         int bindingIndex;
-        if ((int)actionRef.InputID <= (int)InputID.RIGHT)
+        if ((int)actionRef.InputID <= (int)InputID.MOVE_RIGHT)
             bindingIndex = currAction.action.GetBindingIndexForControl(currAction.action.controls[(int)actionRef.InputID]);
         else
             bindingIndex = currAction.action.GetBindingIndexForControl(currAction.action.controls[0]);
