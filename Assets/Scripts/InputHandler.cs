@@ -2,10 +2,15 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class InputHandler : MonoBehaviour
+public class InputHandler : Singleton<InputHandler>
 {
     public float dir {
+        get;
+        private set;
+    }
+    public Vector2 mousePos {
         get;
         private set;
     }
@@ -15,13 +20,13 @@ public class InputHandler : MonoBehaviour
     public ButtonState jump {
         get{return buttons[1];}
     }
-    public ButtonState primary {
+    public ButtonState attack {
         get {return buttons[2];}
     }
-    public ButtonState secondary {
+    public ButtonState grapple {
         get {return buttons[3];}
     }
-    public ButtonState dodge {
+    public ButtonState summon {
         get {return buttons[4];}
     }
     public ButtonState interact {
@@ -29,9 +34,6 @@ public class InputHandler : MonoBehaviour
     }
     public ButtonState menu {
         get {return buttons[6];}
-    }
-    public ButtonState any {
-        get {return buttons[7];}
     }
 
     [SerializeField] private int buttonCount = 1;
@@ -66,15 +68,15 @@ public class InputHandler : MonoBehaviour
         this.buttons[1].Set(ctx);
     }
 
-    public void Primary(InputAction.CallbackContext ctx) {
+    public void Attack(InputAction.CallbackContext ctx) {
         this.buttons[2].Set(ctx);
     }
 
-    public void Secondary(InputAction.CallbackContext ctx) {
+    public void Grapple(InputAction.CallbackContext ctx) {
         this.buttons[3].Set(ctx);
     }
 
-    public void Dodge(InputAction.CallbackContext ctx) {
+    public void Summon(InputAction.CallbackContext ctx) {
         this.buttons[4].Set(ctx);
     }
 
@@ -86,8 +88,8 @@ public class InputHandler : MonoBehaviour
         this.buttons[6].Set(ctx);
     }
 
-    public void Any(InputAction.CallbackContext ctx) {
-        this.buttons[7].Set(ctx);
+    public void MousePos(InputAction.CallbackContext ctx) {
+        this.mousePos = ctx.ReadValue<Vector2>();
     }
 
     public void FlushBuffer() {
