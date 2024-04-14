@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GroundedCheck ground;
     [SerializeField] private MovementHandler movement;
     [SerializeField] private JumpHandler jump;
+    [SerializeField] private Hookshot hookshot;
 
     private bool grounded;
 
-    void Start() {
+    void Start()
+    {
         GameManager.Instance.CreateHitbox(new HitData())
             .Build();
     }
@@ -43,14 +45,21 @@ public class PlayerController : MonoBehaviour
             jump.StartJump();
         }
 
-        if (InputHandler.Instance.Attack.pressed) {
-            
+        if (InputHandler.Instance.Grapple.pressed)
+        {
+            hookshot.TryStartHookshot();
+        }
+
+        if (InputHandler.Instance.Attack.pressed)
+        {
+
         }
 
         rbody.velocity = velocity;
     }
 
-    public void OnHit(HitData data) {
+    public void OnHit(HitData data)
+    {
         Debug.Log("Yeouch!");
         movement.Pause(0.5f);
         jump.Pause(0.5f);

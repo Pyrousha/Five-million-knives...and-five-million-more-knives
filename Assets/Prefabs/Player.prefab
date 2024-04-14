@@ -56,6 +56,7 @@ MonoBehaviour:
   ground: {fileID: 4019304172779022861}
   movement: {fileID: 4515881921648772602}
   jump: {fileID: 574090274925074346}
+  hookshot: {fileID: 1038529345584280559}
 --- !u!114 &4515881921648772602
 MonoBehaviour:
   m_ObjectHideFlags: 0
