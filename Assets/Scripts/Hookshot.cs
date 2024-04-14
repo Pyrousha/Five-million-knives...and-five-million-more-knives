@@ -14,6 +14,8 @@ public class Hookshot : MonoBehaviour
     [SerializeField] private float hookThrowDistance = 2f;
     [SerializeField] private LayerMask hookableLayer;
 
+    [SerializeField] private float dashSpeed = 20f;
+
     [SerializeField] private PlayerController playerController;
     [SerializeField] private MovementHandler movementHandler;
     [SerializeField] private JumpHandler jumpHandler;
@@ -56,6 +58,8 @@ public class Hookshot : MonoBehaviour
         jumpHandler.DisableGravity();
         playerRB.velocity = Vector2.zero;
 
+        hookshotTransform.localPosition = Vector3.zero;
+
         //Start hookshot spin
         spinHookRoutine.Stop();
         spinHookRoutine = Routine.Start(this, SpinHookRoutine());
@@ -74,7 +78,7 @@ public class Hookshot : MonoBehaviour
         hookshotTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg);
 
         RaycastHit2D rayHit = Physics2D.Raycast(playerCenter.position, toMouse, hookThrowDistance, hookableLayer);
-        if (rayHit.collider != null)
+        if (rayHit)
         {
             throwHookRoutine.Stop();
             throwHookRoutine = Routine.Start(this, ThrowHookRoutine(rayHit.point, true));
@@ -82,7 +86,7 @@ public class Hookshot : MonoBehaviour
         else
         {
             throwHookRoutine.Stop();
-            throwHookRoutine = Routine.Start(this, ThrowHookRoutine((Vector2)playerCenter.position + toMouse * hookThrowDistance, true));
+            throwHookRoutine = Routine.Start(this, ThrowHookRoutine((Vector2)playerCenter.position + toMouse * hookThrowDistance, false));
         }
     }
 
@@ -117,19 +121,34 @@ public class Hookshot : MonoBehaviour
         if (_hitTarget)
         {
             //Reel player towards hook
+
+            Vector2 toTarget = (_target - (Vector2)playerCenter.position);
+            playerRB.velocity = toTarget.normalized * dashSpeed;
+            float duration = toTarget.magnitude / dashSpeed;
+
+            yield return Tween.Float(0, 1, (t) =>
+            {
+                hookshotTransform.localScale = Vector3.one * (1 - t);
+                hookshotTransform.position = _target;
+            }, duration);
+
+            //Dash is done
+            jumpHandler.ResetGravity();
         }
         else
         {
             //Did not hit anything with hookshot
             jumpHandler.ResetGravity();
+
+            //Reel in hook
+            yield return Tween.Float(0, 1, (t) =>
+            {
+                hookshotTransform.position = Vector2.Lerp(_target, playerCenter.position, t);
+                hookshotTransform.localScale = Vector3.one * (1 - t);
+            }, distance / hookThrowSpeed);
         }
 
-        yield return Tween.Float(0, 1, (t) =>
-        {
-            hookshotTransform.position = Vector2.Lerp(_target, playerCenter.position, t);
-            hookshotTransform.localScale = Vector3.one * (1 - t);
-        }, distance / hookThrowSpeed);
-
+        hookshotTransform.localPosition = Vector3.zero;
         playerController.EndAction();
     }
 }
