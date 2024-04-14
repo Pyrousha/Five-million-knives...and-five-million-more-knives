@@ -74,7 +74,6 @@ public class Hookshot : MonoBehaviour
         hookshotTransform.localScale = Vector3.one;
 
         Vector2 toMouse = ((Vector2)mainCamera.ScreenToWorldPoint(InputHandler.Instance.MousePos) - (Vector2)playerCenter.position).normalized;
-
         hookshotTransform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg);
 
         RaycastHit2D rayHit = Physics2D.Raycast(playerCenter.position, toMouse, hookThrowDistance, hookableLayer);
@@ -124,6 +123,7 @@ public class Hookshot : MonoBehaviour
 
             Vector2 toTarget = (_target - (Vector2)playerCenter.position);
             playerRB.velocity = toTarget.normalized * dashSpeed;
+            movementHandler.ForceDir(toTarget.x > 0 ? 1 : -1);
             float duration = toTarget.magnitude / dashSpeed;
 
             yield return Tween.Float(0, 1, (t) =>
@@ -132,8 +132,11 @@ public class Hookshot : MonoBehaviour
                 hookshotTransform.position = _target;
             }, duration);
 
+            //yield return new WaitForSeconds(0.1f);
+
             //Dash is done
             jumpHandler.ResetGravity();
+
         }
         else
         {

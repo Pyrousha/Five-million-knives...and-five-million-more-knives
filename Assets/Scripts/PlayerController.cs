@@ -16,8 +16,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.CreateHitbox(new HitData())
-            .Build();
+
     }
 
     void FixedUpdate()

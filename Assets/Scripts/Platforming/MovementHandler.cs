@@ -18,6 +18,7 @@ public class MovementHandler : MonoBehaviour
     float pauseStarted;
     float pausedUntil;
     float storedVelocity;
+    float curSpeed;
 
 
     void Awake() {
@@ -43,14 +44,14 @@ public class MovementHandler : MonoBehaviour
                 rbody.velocity = new Vector2(decelSpeed * dir * decelerationCurve.Evaluate(Time.time - timestamp + decelerationTime), rbody.velocity.y);
         } else {
             if (moving)
-                rbody.velocity = new Vector2(speed * dir, rbody.velocity.y);
+                rbody.velocity = new Vector2(curSpeed * dir, rbody.velocity.y);
         }
     }
 
     public void StartDeceleration() {
         moving = false;
         timestamp = Time.time + decelerationTime;
-        decelSpeed = speed;
+        decelSpeed = Mathf.Abs(rbody.velocity.x);
         if (Mathf.Abs(rbody.velocity.x) < decelSpeed)
             decelSpeed = Mathf.Abs(rbody.velocity.x);
     }
@@ -61,6 +62,11 @@ public class MovementHandler : MonoBehaviour
     }
 
     public void UpdateMovement(float dir) {
+        curSpeed = Mathf.Abs(rbody.velocity.x);
+        if (curSpeed > speed) {
+            curSpeed -= (curSpeed - speed) * 0.1f;
+        } else 
+            curSpeed = speed;
         this.dir = dir;
         moving = true;
     }
@@ -84,6 +90,10 @@ public class MovementHandler : MonoBehaviour
         moving = false;
         timestamp = 0;
         rbody.velocity = rbody.velocity.y * Vector2.up;
+    }
+
+    public void ForceDir(float dir) {
+        this.dir = dir;
     }
 
 }
