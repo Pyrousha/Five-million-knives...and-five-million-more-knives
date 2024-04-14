@@ -29,8 +29,6 @@ public class PlayerController : MonoBehaviour
 
     void HandleInputs()
     {
-        var velocity = rbody.velocity;
-
         if (!acting && InputHandler.Instance.Move.pressed)
         {
             movement.StartAcceleration(InputHandler.Instance.Dir);
@@ -58,8 +56,6 @@ public class PlayerController : MonoBehaviour
             hookshot.StartHookshot();
             StartAction();
         }
-
-        rbody.velocity = velocity;
     }
     public void StartAction()
     {
