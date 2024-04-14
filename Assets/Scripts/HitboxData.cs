@@ -10,6 +10,7 @@ public struct HitboxData
     private Quaternion rotation;
     private HitData hitData;
     private Vector2 hitboxSize;
+    private float duration;
 
     public HitboxData SetHitData(HitData data) {
         this.hitData = data;
@@ -41,11 +42,21 @@ public struct HitboxData
         return this;
     }
 
+    public HitboxData SetDuration(float duration) {
+        this.duration = duration;
+        return this;
+    }
+
     public void Build() {
         var box = GameManager.Instance.GetHitbox(pos, rotation, parent);
         box.GetComponent<HitboxController>().Setup(team, hitData);
+        
         if (hitboxSize != default(Vector2))
             box.GetComponent<BoxCollider2D>().size = hitboxSize;
+        
+        if (duration != 0) {
+            box.AddComponent<DestroyAfterDelay>().Init(duration);
+        }
     }
 }
 
