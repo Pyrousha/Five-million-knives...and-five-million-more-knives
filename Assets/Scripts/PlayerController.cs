@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AfterimageController afterimage;
     [SerializeField] private PlayerStats playerStats;
 
+    private Interactable focusedInteract;
+    private List<Interactable> interactables = new();
     private bool grounded;
     private bool acting;
     private bool cancellable;
@@ -22,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        UpdateInteractables();
+
         grounded = ground.CheckGrounded();
 
         HandleInputs();
@@ -45,6 +50,10 @@ public class PlayerController : MonoBehaviour
         if (((!acting && grounded) || cancellable) && InputHandler.Instance.Jump.pressed)
         {
             jump.StartJump();
+        }
+
+        if (focusedInteract != null && InputHandler.Instance.Interact.pressed) {
+            focusedInteract.Interact();
         }
 
         if ((!acting || cancellable) && InputHandler.Instance.Attack.pressed)
@@ -87,5 +96,31 @@ public class PlayerController : MonoBehaviour
         jump.Pause(0.5f);
 
         playerStats.TakeDamage(data.damage);
+    }
+
+    public void AddInteractable(Interactable interact) {
+        interactables.Add(interact);
+    }
+
+    public void RemoveInteractable(Interactable interact) {
+        interactables.Remove(interact);
+        if (interact == focusedInteract) {
+            focusedInteract = null;
+            interact?.Unfocus();
+        }
+    }
+
+    public void UpdateInteractables() {
+        Interactable newFocus = null;
+        foreach (var interact in interactables) {
+            if (newFocus == null || Vector2.Distance(transform.position, newFocus.transform.position) > Vector2.Distance(transform.position, interact.transform.position))
+                newFocus = interact;
+        }
+
+        if (focusedInteract != newFocus) {
+            focusedInteract?.Unfocus();
+            focusedInteract = newFocus;
+            focusedInteract?.Focus();
+        }
     }
 }
