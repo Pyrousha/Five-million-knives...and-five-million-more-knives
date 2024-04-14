@@ -36,7 +36,7 @@ public class PauseMenuCanvas : Submenu
 
     public void TryOpen()
     {
-        if (SceneTransitioner.CurrBuildIndex > SceneTransitioner.MAIN_MENU_INDEX && SceneTransitioner.CurrBuildIndex != SceneTransitioner.CREDITS_SCENE_INDEX)
+        if (SceneTransitioner.CurrBuildIndex > SceneTransitioner.MAIN_MENU_INDEX)
         {
             if (!SceneTransitioner.Instance.LevelFinished)
             {

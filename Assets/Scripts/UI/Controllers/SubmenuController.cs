@@ -3,7 +3,7 @@ using UnityEngine;
 public class SubmenuController : Singleton<SubmenuController>
 {
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (InputHandler.Instance.Menu.down)
         {
