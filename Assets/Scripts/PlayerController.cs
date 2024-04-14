@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour
 
     void Start() {
         GameManager.Instance.CreateHitbox(new HitData())
-        .SetTeam(HitboxTeam.PLAYER)
-        .Build();
+            .Build();
     }
 
     void FixedUpdate()
@@ -44,10 +43,16 @@ public class PlayerController : MonoBehaviour
             jump.StartJump();
         }
 
+        if (InputHandler.Instance.Attack.pressed) {
+            
+        }
+
         rbody.velocity = velocity;
     }
 
     public void OnHit(HitData data) {
         Debug.Log("Yeouch!");
+        movement.Pause(0.5f);
+        jump.Pause(0.5f);
     }
 }

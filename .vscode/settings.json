@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Five-million-knives-and-five-million-more-knives.sln"
+    "dotnet.defaultSolution": "Five-million-knives...and-five-million-more-knives.sln"
 }

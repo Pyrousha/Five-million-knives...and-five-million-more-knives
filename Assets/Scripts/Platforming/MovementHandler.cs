@@ -14,7 +14,10 @@ public class MovementHandler : MonoBehaviour
     private float dir;
     private float decelSpeed;
     bool moving = false;
-    // Update is called once per frame
+    bool paused;
+    float pauseStarted;
+    float pausedUntil;
+    float storedVelocity;
 
 
     void Awake() {
@@ -24,6 +27,16 @@ public class MovementHandler : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (Time.time < pausedUntil)
+            return;
+
+        if (paused) {
+            paused = false;
+            rbody.velocity = new Vector2(storedVelocity, rbody.velocity.y);
+            timestamp += pausedUntil - pauseStarted;
+        }
+
         if (Time.time < timestamp) {
             if (moving)
                 rbody.velocity = new Vector2(speed * dir * accelerationCurve.Evaluate(Time.time - timestamp + accelerationTime), rbody.velocity.y);
@@ -53,8 +66,25 @@ public class MovementHandler : MonoBehaviour
         moving = true;
     }
 
+    public void Pause(float duration) {
+        float endPause = Time.time + duration;
 
-    
+        if (paused) {
+            if (endPause > pausedUntil)
+                pausedUntil = endPause;
+        } else {
+            paused = true;
+            pauseStarted = Time.time;
+            pausedUntil = endPause;
+            storedVelocity = rbody.velocity.x;
+            rbody.velocity = new Vector2(0, rbody.velocity.y);
+        }
+    }
 
+    public void ForceStop() {
+        moving = false;
+        timestamp = 0;
+        rbody.velocity = rbody.velocity.y * Vector2.up;
+    }
 
 }

@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbody: {fileID: 8996698301689316301}
+  gravity: 20
   velocityScalar: 20
   terminalVelocity: 30
   risingCurve:
