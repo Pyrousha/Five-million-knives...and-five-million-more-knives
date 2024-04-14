@@ -6,12 +6,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GroundedCheck ground;
     [SerializeField] private MovementHandler movement;
     [SerializeField] private JumpHandler jump;
+    [SerializeField] private AfterimageController afterimage;
 
     private bool grounded;
 
     void Start() {
-        GameManager.Instance.CreateHitbox(new HitData())
-            .Build();
+
     }
 
     void FixedUpdate()

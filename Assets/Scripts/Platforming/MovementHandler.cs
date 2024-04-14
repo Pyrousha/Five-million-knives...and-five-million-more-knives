@@ -27,7 +27,6 @@ public class MovementHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-
         if (Time.time < pausedUntil)
             return;
 
