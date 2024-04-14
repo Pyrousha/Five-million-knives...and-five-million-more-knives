@@ -67,6 +67,9 @@ public class MovementHandler : MonoBehaviour
             curSpeed -= (curSpeed - speed) * 0.1f;
         } else 
             curSpeed = speed;
+
+        if (this.dir != dir)
+            curSpeed = speed;
         this.dir = dir;
         moving = true;
     }
