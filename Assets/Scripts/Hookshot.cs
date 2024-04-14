@@ -14,6 +14,11 @@ public class Hookshot : MonoBehaviour
     [SerializeField] private float hookThrowDistance = 2f;
     [SerializeField] private LayerMask hookableLayer;
 
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private MovementHandler movementHandler;
+    [SerializeField] private JumpHandler jumpHandler;
+    [SerializeField] private Rigidbody2D playerRB;
+
     private Camera mainCamera;
 
     private Transform hookshotTransform;
@@ -42,23 +47,22 @@ public class Hookshot : MonoBehaviour
         hookshotTransform.localScale = Vector3.zero;
     }
 
-    public void TryStartHookshot()
+    public void StartHookshot()
     {
-        if (hookState != HookStateEnum.IDLE)
-            return;
-
         hookState = HookStateEnum.SPINNING;
+
+        movementHandler.ForceStop();
+        jumpHandler.ForceLanding();
+        jumpHandler.DisableGravity();
+        playerRB.velocity = Vector2.zero;
 
         //Start hookshot spin
         spinHookRoutine.Stop();
         spinHookRoutine = Routine.Start(this, SpinHookRoutine());
     }
 
-    private void TryThrowHook()
+    private void ThrowHook()
     {
-        if (hookState != HookStateEnum.SPINNING)
-            return;
-
         hookState = HookStateEnum.THROWING;
 
         //Throw hookshot towards mouse
@@ -97,7 +101,7 @@ public class Hookshot : MonoBehaviour
             hookshotTransform.localEulerAngles = new Vector3(0, 0, -90f + Mathf.Lerp(0, 360 + 90, t));
         }, hookSpinSpeed);
 
-        TryThrowHook();
+        ThrowHook();
     }
 
     private IEnumerator ThrowHookRoutine(Vector2 _target, bool _hitTarget)
@@ -114,6 +118,11 @@ public class Hookshot : MonoBehaviour
         {
             //Reel player towards hook
         }
+        else
+        {
+            //Did not hit anything with hookshot
+            jumpHandler.ResetGravity();
+        }
 
         yield return Tween.Float(0, 1, (t) =>
         {
@@ -121,6 +130,6 @@ public class Hookshot : MonoBehaviour
             hookshotTransform.localScale = Vector3.one * (1 - t);
         }, distance / hookThrowSpeed);
 
-        hookState = HookStateEnum.IDLE;
+        playerController.EndAction();
     }
 }

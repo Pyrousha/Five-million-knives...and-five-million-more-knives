@@ -58,6 +58,7 @@ MonoBehaviour:
   movement: {fileID: 4515881921648772602}
   jump: {fileID: 574090274925074346}
   hookshot: {fileID: 1038529345584280559}
+  afterimage: {fileID: 2338883194472956272}
 --- !u!114 &4515881921648772602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,6 +741,10 @@ MonoBehaviour:
   hookableLayer:
     serializedVersion: 2
     m_Bits: 2176
+  playerController: {fileID: -7347165683731981234}
+  movementHandler: {fileID: 4515881921648772602}
+  jumpHandler: {fileID: 574090274925074346}
+  playerRB: {fileID: 8996698301689316301}
 --- !u!1001 &3403461616874175595
 PrefabInstance:
   m_ObjectHideFlags: 0

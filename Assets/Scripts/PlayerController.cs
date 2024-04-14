@@ -49,19 +49,14 @@ public class PlayerController : MonoBehaviour
             jump.StartJump();
         }
 
-        if (InputHandler.Instance.Grapple.pressed)
-        {
-            hookshot.TryStartHookshot();
-        }
-
-        if (InputHandler.Instance.Attack.pressed)
-        {
-
-        }
-
         if ((!acting || cancellable) && InputHandler.Instance.Attack.pressed)
         {
 
+        }
+        else if ((!acting || cancellable) && InputHandler.Instance.Grapple.pressed)
+        {
+            hookshot.StartHookshot();
+            StartAction();
         }
 
         rbody.velocity = velocity;
