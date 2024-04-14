@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private JumpHandler jump;
     [SerializeField] private Hookshot hookshot;
     [SerializeField] private AfterimageController afterimage;
+    [SerializeField] private PlayerStats playerStats;
 
     private bool grounded;
     private bool acting;
@@ -55,6 +56,12 @@ public class PlayerController : MonoBehaviour
             hookshot.StartHookshot();
             StartAction();
         }
+
+        if ((!acting || cancellable) && InputHandler.Instance.Summon.pressed)
+        {
+            if (playerStats.TrySummon())
+                StartAction();
+        }
     }
     public void StartAction()
     {
@@ -78,5 +85,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Yeouch!");
         movement.Pause(0.5f);
         jump.Pause(0.5f);
+
+        playerStats.TakeDamage(data.damage);
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4019304172779022861}
   - component: {fileID: 4353305034535547511}
   - component: {fileID: 8996698301689316301}
+  - component: {fileID: 3600867751484644100}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -59,6 +60,7 @@ MonoBehaviour:
   jump: {fileID: 574090274925074346}
   hookshot: {fileID: 1038529345584280559}
   afterimage: {fileID: 2338883194472956272}
+  playerStats: {fileID: 3600867751484644100}
 --- !u!114 &4515881921648772602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +284,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &3600867751484644100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50262658776906337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ca587050a724f439e7657f7e68d33a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpSlider: {fileID: 0}
+  summonSlider: {fileID: 0}
+  maxHp: 10
+  maxSp: 2
 --- !u!1 &734342200154238000
 GameObject:
   m_ObjectHideFlags: 0
