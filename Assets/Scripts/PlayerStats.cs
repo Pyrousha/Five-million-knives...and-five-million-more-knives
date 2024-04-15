@@ -16,7 +16,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float maxSp;
     private float currSp;
 
-    private static float summonCost = 1;
+    public static float SUMMON_COST = 1;
     private bool dead = false;
 
 
@@ -50,15 +50,13 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public bool TrySummon()
+    public bool TryConsumeStamina(float amt)
     {
-        if (currSp < summonCost)
+        if (currSp < amt)
             return false;
 
-        currSp -= summonCost;
+        currSp -= amt;
         UpdateSPSlider();
-
-        Routine.Start(this, SummonRoutine());
 
         return true;
     }

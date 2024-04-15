@@ -28,7 +28,7 @@ public class EnemyController_Melee : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = PlayerController.Instance.transform;
+        player = GameManager.Instance.GetPlayer().transform;
 
         actionable = true;
 
