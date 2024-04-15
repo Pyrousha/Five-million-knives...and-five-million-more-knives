@@ -127,7 +127,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 4
+      y: 17
       width: 11
       height: 6
     spriteID: 38cc32ecbd8b7c348bc1938921ecce01
@@ -138,18 +138,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
+    uvTransform: {x: 4, y: 17}
   - name: vfx_knifeAttack_Frame_1
     originalName: 
-    pivot: {x: 0.45454547, y: 0.5}
+    pivot: {x: 0.5, y: 0.2}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 18
-      width: 11
-      height: 6
+      y: 4
+      width: 14
+      height: 5
     spriteID: 5b248f80e0ee9174094e32b3fe1e518e
     spriteBone: []
     spriteOutline: []
@@ -158,7 +158,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 18}
+    uvTransform: {x: 4, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -179,10 +179,10 @@ ScriptedImporter:
     - name: vfx_knifeAttack_Frame_1
       frameIndex: 1
       cellRect:
-        x: 3
-        y: 5
-        width: 9
-        height: 4
+        x: 1
+        y: 7
+        width: 12
+        height: 3
       spriteId: 5b248f80e0ee9174094e32b3fe1e518e
     linkedCells: []
     parentIndex: -1
