@@ -35,7 +35,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 8
+    spritePixelsToUnits: 100
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -75,7 +75,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
+    defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -87,7 +87,7 @@ ScriptedImporter:
     importHiddenLayers: 0
     layerImportMode: 1
     defaultPivotSpace: 0
-    defaultPivotAlignment: 0
+    defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
     spritePadding: 0
     generateModelPrefab: 1
@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638487974432858635
+  platformSettingsDirtyTick: 0
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,7 +121,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: enemy_boss
     originalName: 
-    pivot: {x: 0.8387096, y: 0.5217391}
+    pivot: {x: 0.8387096, y: -0.3478261}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -141,7 +141,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 243}
   - name: enemy_boss_Frame_1
     originalName: 
-    pivot: {x: 0.85, y: 0.54761904}
+    pivot: {x: 0.85, y: -0.4047619}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -161,7 +161,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 414}
   - name: enemy_boss_Frame_2
     originalName: 
-    pivot: {x: 0.8148148, y: 0.53488374}
+    pivot: {x: 0.8148148, y: -0.39534885}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -181,7 +181,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 464}
   - name: enemy_boss_Frame_3
     originalName: 
-    pivot: {x: 0.7674419, y: 0.53488374}
+    pivot: {x: 0.7674419, y: -0.39534885}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -201,7 +201,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 327}
   - name: enemy_boss_Frame_4
     originalName: 
-    pivot: {x: 0.7674419, y: 0.54761904}
+    pivot: {x: 0.7674419, y: -0.4047619}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -221,7 +221,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 378}
   - name: enemy_boss_Frame_5
     originalName: 
-    pivot: {x: 0.7674419, y: 0.54761904}
+    pivot: {x: 0.7674419, y: -0.4047619}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -241,7 +241,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 428}
   - name: enemy_boss_Frame_6
     originalName: 
-    pivot: {x: 0.7674419, y: 0.54761904}
+    pivot: {x: 0.7674419, y: -0.4047619}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -261,7 +261,7 @@ ScriptedImporter:
     uvTransform: {x: 159, y: 86}
   - name: enemy_boss_Frame_7
     originalName: 
-    pivot: {x: 0.5538462, y: 0.6969697}
+    pivot: {x: 0.5538462, y: -0.51515156}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -281,7 +281,7 @@ ScriptedImporter:
     uvTransform: {x: 159, y: 45}
   - name: enemy_boss_Frame_8
     originalName: 
-    pivot: {x: 0.27722773, y: 0.6969697}
+    pivot: {x: 0.27722773, y: -0.51515156}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -301,7 +301,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 4}
   - name: enemy_boss_Frame_9
     originalName: 
-    pivot: {x: 0.18181817, y: 0.49999997}
+    pivot: {x: 0.18181817, y: -0.36956522}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -321,7 +321,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: enemy_boss_Frame_10
     originalName: 
-    pivot: {x: 0.31372547, y: 0.49999997}
+    pivot: {x: 0.31372547, y: -0.36956522}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -341,7 +341,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 45}
   - name: enemy_boss_Frame_11
     originalName: 
-    pivot: {x: 0.37209302, y: 0.49999997}
+    pivot: {x: 0.37209302, y: -0.36956522}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -361,7 +361,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 99}
   - name: enemy_boss_Frame_12
     originalName: 
-    pivot: {x: 0.38095236, y: 0.49999997}
+    pivot: {x: 0.38095236, y: -0.36956522}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -381,7 +381,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 153}
   - name: enemy_boss_Frame_13
     originalName: 
-    pivot: {x: 0.38095236, y: 0.49999997}
+    pivot: {x: 0.38095236, y: -0.36956522}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -401,7 +401,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 207}
   - name: enemy_boss_Frame_14
     originalName: 
-    pivot: {x: 0.7, y: 0.2916667}
+    pivot: {x: 0.7, y: -0.5416666}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -421,7 +421,7 @@ ScriptedImporter:
     uvTransform: {x: 159, y: 283}
   - name: enemy_boss_Frame_15
     originalName: 
-    pivot: {x: 0.7241379, y: -0.8571429}
+    pivot: {x: 0.7241379, y: -2.761905}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -441,7 +441,7 @@ ScriptedImporter:
     uvTransform: {x: 209, y: 4}
   - name: enemy_boss_Frame_16
     originalName: 
-    pivot: {x: 0.62068975, y: 1.7619048}
+    pivot: {x: 0.62068975, y: -0.14285715}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -461,7 +461,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 478}
   - name: enemy_boss_Frame_17
     originalName: 
-    pivot: {x: 0.6000001, y: 0.6458333}
+    pivot: {x: 0.6000001, y: -0.18749999}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -481,7 +481,7 @@ ScriptedImporter:
     uvTransform: {x: 159, y: 339}
   - name: enemy_boss_Frame_18
     originalName: 
-    pivot: {x: 0.3035714, y: 0.46}
+    pivot: {x: 0.3035714, y: -0.34}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -501,7 +501,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 356}
   - name: enemy_boss_Frame_19
     originalName: 
-    pivot: {x: 0.30909088, y: 0.4509804}
+    pivot: {x: 0.30909088, y: -0.33333334}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -521,7 +521,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 297}
   - name: enemy_boss_Frame_20
     originalName: 
-    pivot: {x: 0.3035714, y: 0.44230768}
+    pivot: {x: 0.3035714, y: -0.3269231}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -541,7 +541,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 123}
   - name: enemy_boss_Frame_21
     originalName: 
-    pivot: {x: 0.3035714, y: 0.44230768}
+    pivot: {x: 0.3035714, y: -0.3269231}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -561,7 +561,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 183}
   - name: enemy_boss_Frame_22
     originalName: 
-    pivot: {x: 0.2786885, y: 0.68421054}
+    pivot: {x: 0.2786885, y: -0.01754386}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -581,7 +581,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 58}
   - name: enemy_boss_Frame_23
     originalName: 
-    pivot: {x: 0.5151515, y: 0.6896552}
+    pivot: {x: 0.5151515, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -601,7 +601,7 @@ ScriptedImporter:
     uvTransform: {x: 100, y: 261}
   - name: enemy_boss_Frame_24
     originalName: 
-    pivot: {x: 0.7586206, y: 0.5853659}
+    pivot: {x: 0.7586206, y: -0.39024392}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -610,7 +610,7 @@ ScriptedImporter:
       y: 184
       width: 29
       height: 41
-    spriteID: 530a3702b920ac74ab481d86ee0ce134
+    spriteID: eb5ad23314166574b8c5e0c8954fed4c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -621,7 +621,7 @@ ScriptedImporter:
     uvTransform: {x: 210, y: 184}
   - name: enemy_boss_Frame_25
     originalName: 
-    pivot: {x: 0.7741936, y: 0.5853659}
+    pivot: {x: 0.7741936, y: -0.39024392}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -630,7 +630,7 @@ ScriptedImporter:
       y: 135
       width: 31
       height: 41
-    spriteID: e7ba9f22c2142e344a3ac496e81eb802
+    spriteID: b19a552d948c6fd43bfb5e98a13b8168
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -641,7 +641,7 @@ ScriptedImporter:
     uvTransform: {x: 210, y: 135}
   - name: enemy_boss_Frame_26
     originalName: 
-    pivot: {x: 0.78125, y: 0.5853659}
+    pivot: {x: 0.78125, y: -0.39024392}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -650,7 +650,7 @@ ScriptedImporter:
       y: 444
       width: 32
       height: 41
-    spriteID: fc5bd3daf8fea8747a6c92ef21ac819c
+    spriteID: 48364935921269b40a8cdbad30082cfe
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -661,7 +661,7 @@ ScriptedImporter:
     uvTransform: {x: 159, y: 444}
   - name: enemy_boss_Frame_27
     originalName: 
-    pivot: {x: 0.78125, y: 0.5853659}
+    pivot: {x: 0.78125, y: -0.39024392}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -670,7 +670,7 @@ ScriptedImporter:
       y: 86
       width: 32
       height: 41
-    spriteID: 8a404c10f72c58a4486cf7ced5dc9570
+    spriteID: 19adeb9f2ab572d45b432fc7671938a8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -681,7 +681,7 @@ ScriptedImporter:
     uvTransform: {x: 210, y: 86}
   - name: enemy_boss_Frame_28
     originalName: 
-    pivot: {x: 0.5121951, y: 0.5853659}
+    pivot: {x: 0.5121951, y: -0.39024392}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -690,7 +690,7 @@ ScriptedImporter:
       y: 136
       width: 41
       height: 41
-    spriteID: d9baceebf0d200749b061ee68e1bb280
+    spriteID: ce9d8ff4e50e00b48baa72928be32698
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -701,7 +701,7 @@ ScriptedImporter:
     uvTransform: {x: 159, y: 136}
   - name: enemy_boss_Frame_29
     originalName: 
-    pivot: {x: 0.525, y: 0.5853659}
+    pivot: {x: 0.525, y: -0.39024392}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -710,7 +710,7 @@ ScriptedImporter:
       y: 185
       width: 40
       height: 41
-    spriteID: 311ab180ce8d7a343b1d7fec845b5fbb
+    spriteID: fbee2b48a04f7434c97b873689455ffa
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -721,7 +721,7 @@ ScriptedImporter:
     uvTransform: {x: 159, y: 185}
   - name: enemy_boss_Frame_30
     originalName: 
-    pivot: {x: 0.525, y: 0.5853659}
+    pivot: {x: 0.525, y: -0.39024392}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -730,7 +730,7 @@ ScriptedImporter:
       y: 234
       width: 40
       height: 41
-    spriteID: f69cc198c9fd93e439a506fc9c1b39ed
+    spriteID: c4ca19ab6ca72bf4bafa12d6834ee0a7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -741,7 +741,7 @@ ScriptedImporter:
     uvTransform: {x: 159, y: 234}
   - name: enemy_boss_Frame_31
     originalName: 
-    pivot: {x: 0.61764705, y: 0.5853659}
+    pivot: {x: 0.61764705, y: -0.39024392}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -750,7 +750,7 @@ ScriptedImporter:
       y: 395
       width: 34
       height: 41
-    spriteID: d0049d9bbfa023f449ac8e817b38295f
+    spriteID: 10502fccc998c654585f3e101d6e26b4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -967,7 +967,7 @@ ScriptedImporter:
         y: 16
         width: 29
         height: 41
-      spriteId: 530a3702b920ac74ab481d86ee0ce134
+      spriteId: eb5ad23314166574b8c5e0c8954fed4c
     - name: enemy_boss_Frame_25
       frameIndex: 25
       cellRect:
@@ -975,7 +975,7 @@ ScriptedImporter:
         y: 16
         width: 31
         height: 41
-      spriteId: e7ba9f22c2142e344a3ac496e81eb802
+      spriteId: b19a552d948c6fd43bfb5e98a13b8168
     - name: enemy_boss_Frame_26
       frameIndex: 26
       cellRect:
@@ -983,7 +983,7 @@ ScriptedImporter:
         y: 16
         width: 32
         height: 41
-      spriteId: fc5bd3daf8fea8747a6c92ef21ac819c
+      spriteId: 48364935921269b40a8cdbad30082cfe
     - name: enemy_boss_Frame_27
       frameIndex: 27
       cellRect:
@@ -991,7 +991,7 @@ ScriptedImporter:
         y: 16
         width: 32
         height: 41
-      spriteId: 8a404c10f72c58a4486cf7ced5dc9570
+      spriteId: 19adeb9f2ab572d45b432fc7671938a8
     - name: enemy_boss_Frame_28
       frameIndex: 28
       cellRect:
@@ -999,7 +999,7 @@ ScriptedImporter:
         y: 16
         width: 41
         height: 41
-      spriteId: d9baceebf0d200749b061ee68e1bb280
+      spriteId: ce9d8ff4e50e00b48baa72928be32698
     - name: enemy_boss_Frame_29
       frameIndex: 29
       cellRect:
@@ -1007,7 +1007,7 @@ ScriptedImporter:
         y: 16
         width: 40
         height: 41
-      spriteId: 311ab180ce8d7a343b1d7fec845b5fbb
+      spriteId: fbee2b48a04f7434c97b873689455ffa
     - name: enemy_boss_Frame_30
       frameIndex: 30
       cellRect:
@@ -1015,7 +1015,7 @@ ScriptedImporter:
         y: 16
         width: 40
         height: 41
-      spriteId: f69cc198c9fd93e439a506fc9c1b39ed
+      spriteId: c4ca19ab6ca72bf4bafa12d6834ee0a7
     - name: enemy_boss_Frame_31
       frameIndex: 31
       cellRect:
@@ -1023,82 +1023,10 @@ ScriptedImporter:
         y: 16
         width: 34
         height: 41
-      spriteId: d0049d9bbfa023f449ac8e817b38295f
+      spriteId: 10502fccc998c654585f3e101d6e26b4
     linkedCells: []
     parentIndex: -1
-  platformSettings:
-  - name: DefaultTexturePlatform
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Standalone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Server
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: Android
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: iPhone
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
-  - name: WebGL
-    overridden: 0
-    ignorePlatformSupport: 0
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    androidETC2FallbackOverride: 0
+  platformSettings: []
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 160, y: 80}

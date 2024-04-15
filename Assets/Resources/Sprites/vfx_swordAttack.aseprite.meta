@@ -121,7 +121,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: vfx_swordAttack_Frame_0
     originalName: 
-    pivot: {x: 0.4915254, y: 0.64705884}
+    pivot: {x: 0.4915254, y: 0.7857143}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -129,7 +129,7 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 59
-      height: 17
+      height: 14
     spriteID: 564231c65811b624f946426d79df5323
     spriteBone: []
     spriteOutline: []
@@ -141,14 +141,14 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: vfx_swordAttack_Frame_1
     originalName: 
-    pivot: {x: -0.57894737, y: 0.40909094}
+    pivot: {x: -0.11111111, y: 0.40909094}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 71
-      y: 4
-      width: 19
+      x: 4
+      y: 26
+      width: 27
       height: 22
     spriteID: cbd055db1b4b5e24d8741c5f0fc3aeca
     spriteBone: []
@@ -158,18 +158,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 71, y: 4}
+    uvTransform: {x: 4, y: 26}
   - name: vfx_swordAttack_Frame_2
     originalName: 
-    pivot: {x: -0.5714286, y: -1.6}
+    pivot: {x: -0.15789473, y: 0.1764706}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 98
-      y: 4
-      width: 14
-      height: 5
+      x: 39
+      y: 26
+      width: 19
+      height: 17
     spriteID: 33739238f518f4d44a433eb8d70223ad
     spriteBone: []
     spriteOutline: []
@@ -178,7 +178,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 98, y: 4}
+    uvTransform: {x: 39, y: 26}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -194,23 +194,23 @@ ScriptedImporter:
         x: 3
         y: 5
         width: 57
-        height: 15
+        height: 12
       spriteId: 564231c65811b624f946426d79df5323
     - name: vfx_swordAttack_Frame_1
       frameIndex: 1
       cellRect:
-        x: 43
+        x: 35
         y: 7
-        width: 17
+        width: 25
         height: 20
       spriteId: cbd055db1b4b5e24d8741c5f0fc3aeca
     - name: vfx_swordAttack_Frame_2
       frameIndex: 2
       cellRect:
-        x: 40
-        y: 24
-        width: 12
-        height: 3
+        x: 35
+        y: 13
+        width: 17
+        height: 15
       spriteId: 33739238f518f4d44a433eb8d70223ad
     linkedCells: []
     parentIndex: -1
