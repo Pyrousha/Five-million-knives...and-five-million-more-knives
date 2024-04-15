@@ -1703,6 +1703,8 @@ MonoBehaviour:
   enemiesList:
   - <Type>k__BackingField: 0
     <Prefab>k__BackingField: {fileID: 84475163111822077, guid: ff30735306635b24da746734c938a879, type: 3}
+  - <Type>k__BackingField: 1
+    <Prefab>k__BackingField: {fileID: 84475163111822077, guid: ee785860d3c87474fa0b4fa4ff2c6c94, type: 3}
   spawnPositions:
   - {fileID: 627287179}
   - {fileID: 1353660356}
@@ -1718,6 +1720,19 @@ MonoBehaviour:
       <SpawnPositionIndex>k__BackingField: 0
       <TimeToWaitTillNextEnemy>k__BackingField: 0.125
     - <Type>k__BackingField: 0
+      <SpawnPositionIndex>k__BackingField: 1
+      <TimeToWaitTillNextEnemy>k__BackingField: 0
+  - <Enemies>k__BackingField:
+    - <Type>k__BackingField: 1
+      <SpawnPositionIndex>k__BackingField: 0
+      <TimeToWaitTillNextEnemy>k__BackingField: 1
+    - <Type>k__BackingField: 1
+      <SpawnPositionIndex>k__BackingField: 1
+      <TimeToWaitTillNextEnemy>k__BackingField: 1
+    - <Type>k__BackingField: 1
+      <SpawnPositionIndex>k__BackingField: 0
+      <TimeToWaitTillNextEnemy>k__BackingField: 0.125
+    - <Type>k__BackingField: 1
       <SpawnPositionIndex>k__BackingField: 1
       <TimeToWaitTillNextEnemy>k__BackingField: 0
 --- !u!4 &1566616742

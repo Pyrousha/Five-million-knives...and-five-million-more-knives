@@ -26,7 +26,9 @@ public class EnemySpawner : Singleton<EnemySpawner>
     [System.Serializable]
     private enum EnemyTypes
     {
-        Basic_Melee
+        Basic_Melee,
+        Basic_Flier,
+        SEPHEREROOPHIII
     }
 
     [System.Serializable]

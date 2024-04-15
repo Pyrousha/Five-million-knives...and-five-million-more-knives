@@ -9,13 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2937186433375115350}
-  - component: {fileID: 3552194691168901870}
+  - component: {fileID: 4675920113006844448}
   - component: {fileID: 7746343187910039064}
-  - component: {fileID: 716860975825016696}
   - component: {fileID: 458294557411828605}
   - component: {fileID: 6197445402748156525}
   m_Layer: 0
-  m_Name: Enemy_Melee
+  m_Name: Enemy_Flier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +38,7 @@ Transform:
   - {fileID: 2801217979624239694}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3552194691168901870
+--- !u!114 &4675920113006844448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,14 +47,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 84475163111822077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9750d8309fddadf4da16e0f10f507bb7, type: 3}
+  m_Script: {fileID: 11500000, guid: 16fed523d6afeb7498f9d2b3ffdcf8a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoveSpeed: 8
-  accelSpeed: 1
-  frictionSpeed: 0.3
-  gravSpeed: 0.3
   sprRend: {fileID: 458294557411828605}
+  maxMoveSpeed: 5
+  accelSpeed: 0.2
+  frictionSpeed: 0.1
+  targDistToPlayer: 10
+  spinRadius: 2
+  attackCooldown: 1
 --- !u!114 &7746343187910039064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,24 +70,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 10
---- !u!114 &716860975825016696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 84475163111822077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4f707a23701b640bed656dca9a37e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floorDetectDistance: 1
-  floorDetectOffset: {x: 0, y: 0.5}
-  footOffset: {x: 0.4, y: 0}
-  floorDetectMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!212 &458294557411828605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -128,7 +111,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2269024054055053545, guid: 1215799384439d047a8414c715b0b3d1, type: 3}
+  m_Sprite: {fileID: 4201412097651096757, guid: 8f30a2fbd62655a4786906374e3d80f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -153,8 +136,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 20
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 209c4280d0c7d02448c1df1b77641f6f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -254,7 +237,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 4392248595132230692}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 209c4280d0c7d02448c1df1b77641f6f, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -277,7 +260,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.75}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -288,7 +271,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 3.5}
+  m_Size: {x: 3.25, y: 2.375}
   m_EdgeRadius: 0
 --- !u!114 &8909525276758156938
 MonoBehaviour:
@@ -317,7 +300,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3552194691168901870}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
         m_MethodName: OnHit
         m_Mode: 1
@@ -371,7 +354,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 5050313989040721764}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 209c4280d0c7d02448c1df1b77641f6f, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -394,7 +377,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.75}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -405,5 +388,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 3.5}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0

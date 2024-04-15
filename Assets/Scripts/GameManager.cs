@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,31 +5,38 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject hitboxPrefab;
     [SerializeField] private List<AnimationClip> hitboxAnims;
-    public HitboxData CreateHitbox(HitData data) {
+    public HitboxData CreateHitbox(HitData data)
+    {
         return new HitboxData().SetHitData(data);
     }
 
-    public GameObject GetHitbox(Vector3 position, Quaternion rotation, Transform parent = null, HitboxAnim animationID = HitboxAnim.DEFAULT) {
+    public GameObject GetHitbox(Vector3 position, Quaternion rotation, Transform parent = null, HitboxAnim animationID = HitboxAnim.DEFAULT)
+    {
         GameObject box = null;
-        if (parent == null) {
+        if (parent == null)
+        {
             box = Instantiate(hitboxPrefab, position, rotation);
-        } else {
+        }
+        else
+        {
             box = Instantiate(hitboxPrefab, parent);
             box.transform.localPosition = position;
             box.transform.localRotation = rotation;
         }
 
-        if (animationID != HitboxAnim.DEFAULT) {
+        if (animationID != HitboxAnim.DEFAULT)
+        {
             Animator animator = box.GetComponent<Animator>();
             AnimatorOverrideController animController = new AnimatorOverrideController(animator.runtimeAnimatorController);
             animController["anim"] = hitboxAnims[(int)animationID - 1];
             animator.runtimeAnimatorController = animController;
         }
-        
+
         return box;
     }
 }
 
-public enum HitboxAnim {
-    DEFAULT, PLAYER_SWORD, PLAYER_KNIFE
+public enum HitboxAnim
+{
+    DEFAULT, PLAYER_SWORD, PLAYER_KNIFE, ENEMY_PROJECTILE
 }

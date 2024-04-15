@@ -48,3 +48,4 @@ MonoBehaviour:
   hitboxAnims:
   - {fileID: -6652945028599005242, guid: 79f216af3bf61c3469334bff7fb0d36e, type: 3}
   - {fileID: 1305837684562017526, guid: d4b29e0aeb4b6ab49894e7307110b3c3, type: 3}
+  - {fileID: 1305837684562017526, guid: d4b29e0aeb4b6ab49894e7307110b3c3, type: 3}

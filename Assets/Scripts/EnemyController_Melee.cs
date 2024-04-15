@@ -2,7 +2,7 @@ using BeauRoutine;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController_Melee : MonoBehaviour
 {
     private Rigidbody2D rb;
     private EnemyStats stats;
@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float accelSpeed;
     [SerializeField] private float frictionSpeed;
     [SerializeField] private float gravSpeed;
+
+    [SerializeField] private SpriteRenderer sprRend;
 
     private Transform player;
 
@@ -46,7 +48,12 @@ public class EnemyController : MonoBehaviour
         if (currSpeed != 0)
             currSpeed = (currSpeed / currSpeedAbs) * Mathf.Max(0, currSpeedAbs - frictionSpeed);
 
-        if (actionable)
+        if (currSpeed > 0)
+            sprRend.flipX = false;
+        else if (currSpeed < 0)
+            sprRend.flipX = true;
+
+        if (actionable && !stats.IsDead)
         {
             if (toPlayer < -1f)
             {
@@ -72,7 +79,7 @@ public class EnemyController : MonoBehaviour
             {
                 //Try attack player
 
-                if ((transform.position - player.position).magnitude < 1f)
+                if ((transform.position - player.position).magnitude < 3f)
                 {
                     Routine.Start(this, AttackRoutine(new Vector3(toPlayer / Mathf.Abs(toPlayer) * 0.95f, 0, 0)));
                     actionable = false;
@@ -88,8 +95,8 @@ public class EnemyController : MonoBehaviour
         GameManager.Instance.CreateHitbox(new HitData(1))
             .SetParent(transform)
             .SetTeam(HitboxTeam.ENEMY)
-            .SetSize(new Vector2(1, 1))
-            .SetPos(pos)
+            .SetSize(new Vector2(2, 3))
+            .SetPos(pos + new Vector3(0, 1.5f, 0))
             .SetDuration(0.5f)
             .Build();
 
@@ -97,7 +104,8 @@ public class EnemyController : MonoBehaviour
         actionable = true;
     }
 
-    public void OnHit() {
+    public void OnHit()
+    {
         endStun = Time.time + 0.5f;
         rb.velocity = Vector2.zero;
     }
