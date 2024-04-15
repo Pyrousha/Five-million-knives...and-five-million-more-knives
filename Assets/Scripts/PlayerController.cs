@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool acting;
     private bool cancellable;
     private bool parrying;
+    private float pauseUntil;
 
     private WeaponType currentWeapon = WeaponType.SWORD;
 
@@ -35,11 +36,16 @@ public class PlayerController : MonoBehaviour
         grounded = ground.CheckGrounded();
         animator.SetBool("grounded", grounded);
 
+        if (Time.time > pauseUntil) {
+            animator.speed = 1;
+        }
         HandleInputs();
+            
     }
 
     void HandleInputs()
     {
+
         if (!acting && InputHandler.Instance.Move.pressed)
         {
             movement.StartAcceleration(InputHandler.Instance.Dir);
@@ -62,6 +68,14 @@ public class PlayerController : MonoBehaviour
 
         if (((!acting && grounded) || cancellable) && InputHandler.Instance.Jump.pressed)
         {
+            if (cancellable) {
+                UnpausePlayer();
+                cancellable = false;
+                acting = false;
+                parrying = false;
+            }
+
+            animator.SetBool("running", true);
             jump.StartJump();
         }
 
@@ -93,14 +107,24 @@ public class PlayerController : MonoBehaviour
         else if ((!acting || cancellable) && InputHandler.Instance.Summon.pressed && playerStats.TryConsumeStamina(PlayerStats.SUMMON_COST))
         {
             //StartAction();
-            cancellable = false;
+            if (cancellable) {
+                UnpausePlayer();
+                cancellable = false;
+                acting = false;
+                parrying = false;
+            }
+            animator.SetBool("running", true);
             Instantiate(summonPrefab, new Vector2(Random.Range(-10, 0), Random.Range(4, 6)), Quaternion.identity);
             Instantiate(summonPrefab, new Vector2(Random.Range(0, 11), Random.Range(4, 6)), Quaternion.identity);
         }
     }
     public void StartAction()
     {
-        cancellable = false;
+        if (cancellable) {
+            UnpausePlayer();
+            cancellable = false;
+        }
+        parrying = false;
         animator.SetBool("running", false);
         acting = true;
     }
@@ -108,6 +132,7 @@ public class PlayerController : MonoBehaviour
     public void EndAction()
     {
         acting = false;
+        parrying = false;
     }
 
     public void OnHit(HitData data)
@@ -115,16 +140,28 @@ public class PlayerController : MonoBehaviour
         if (parrying)
         {
             Debug.Log("lol. lmao even");
-            movement.Pause(0.5f);
-            jump.Pause(0.5f);
+            PausePlayer(0.25f);
             cancellable = true;
             return;
         }
         Debug.Log("Yeouch!");
-        movement.Pause(0.5f);
-        jump.Pause(0.5f);
+        PausePlayer(0.25f);
 
         playerStats.TakeDamage(data.damage);
+    }
+
+    public void PausePlayer(float time) {
+        movement.Pause(time);
+        jump.Pause(time);
+        animator.speed = 0;
+        pauseUntil = Time.time + time;
+    }
+
+    public void UnpausePlayer() {
+        movement.Pause(-1);
+        jump.Pause(-1);
+        animator.speed = 1;
+        pauseUntil = 0;
     }
 
     public void AddInteractable(Interactable interact)
