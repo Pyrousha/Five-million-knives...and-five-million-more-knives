@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : Singleton<PlayerController>
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rbody;
     [SerializeField] private Animator animator;
@@ -12,6 +12,7 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private Hookshot hookshot;
     [SerializeField] private AfterimageController afterimage;
     [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private GameObject summonPrefab;
 
     private Interactable focusedInteract;
     private List<Interactable> interactables = new();
@@ -20,11 +21,11 @@ public class PlayerController : Singleton<PlayerController>
     private bool cancellable;
     private bool parrying;
 
-    private WeaponType currentWeapon = WeaponType.KNIFE;
+    private WeaponType currentWeapon = WeaponType.SWORD;
 
-    void Start()
+    void Awake()
     {
-
+        GameManager.Instance.RegisterPlayer(this);
     }
 
     void FixedUpdate()
@@ -88,10 +89,11 @@ public class PlayerController : Singleton<PlayerController>
 
             hookshot.StartHookshot();
         }
-        else if ((!acting || cancellable) && InputHandler.Instance.Summon.pressed)
+        else if ((!acting || cancellable) && InputHandler.Instance.Summon.pressed && playerStats.TryConsumeStamina(PlayerStats.SUMMON_COST))
         {
-            StartAction();
-            playerStats.TrySummon();
+            //StartAction();
+            Instantiate(summonPrefab, new Vector2(Random.Range(-10, 0), Random.Range(4, 6)), Quaternion.identity);
+            Instantiate(summonPrefab, new Vector2(Random.Range(0, 11), Random.Range(4, 6)), Quaternion.identity);
         }
     }
     public void StartAction()
@@ -168,10 +170,10 @@ public class PlayerController : Singleton<PlayerController>
                     .SetDuration(HitboxData.MATCH_ANIM_DURATION)
                     .Build();
                 break;
-            case WeaponType.KNIFE:
+            case WeaponType.ARROW:
                 GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
                     .SetPos((Vector2)transform.position + 1 * toMouse)
-                    .SetAnimation(HitboxAnim.PLAYER_KNIFE)
+                    .SetAnimation(HitboxAnim.PLAYER_ARROW)
                     .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles)
                     .SetTeam(HitboxTeam.PLAYER)
                     .SetSize(new(1, 1))
@@ -180,7 +182,7 @@ public class PlayerController : Singleton<PlayerController>
                     .Build();
                 GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
                     .SetPos((Vector2)transform.position + 1 * toMouse)
-                    .SetAnimation(HitboxAnim.PLAYER_KNIFE)
+                    .SetAnimation(HitboxAnim.PLAYER_ARROW)
                     .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles + 10 * Vector3.forward)
                     .SetTeam(HitboxTeam.PLAYER)
                     .SetSize(new(1, 1))
@@ -189,7 +191,7 @@ public class PlayerController : Singleton<PlayerController>
                     .Build();
                 GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
                     .SetPos((Vector2)transform.position + 1 * toMouse)
-                    .SetAnimation(HitboxAnim.PLAYER_KNIFE)
+                    .SetAnimation(HitboxAnim.PLAYER_ARROW)
                     .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles - 10 * Vector3.forward)
                     .SetTeam(HitboxTeam.PLAYER)
                     .SetSize(new(1, 1))
@@ -201,8 +203,12 @@ public class PlayerController : Singleton<PlayerController>
 
 
     }
+
+    public void PickupWeapon(WeaponType type) {
+        this.currentWeapon = type;
+    }
 }
 
 public enum WeaponType {
-    NONE, SWORD, KNIFE
+    NONE, SWORD, ARROW, MAX
 }

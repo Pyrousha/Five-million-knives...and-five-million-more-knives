@@ -65,6 +65,7 @@ MonoBehaviour:
   hookshot: {fileID: 1038529345584280559}
   afterimage: {fileID: 2338883194472956272}
   playerStats: {fileID: 3600867751484644100}
+  summonPrefab: {fileID: 674351978460229547, guid: 837ae8097ca5c7547853b3af38e7f594, type: 3}
 --- !u!114 &4515881921648772602
 MonoBehaviour:
   m_ObjectHideFlags: 0

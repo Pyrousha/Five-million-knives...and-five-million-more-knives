@@ -7,8 +7,18 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject hitboxPrefab;
     [SerializeField] private List<AnimationClip> hitboxAnims;
+
+    private PlayerController player;
     public HitboxData CreateHitbox(HitData data) {
         return new HitboxData().SetHitData(data);
+    }
+
+    public PlayerController GetPlayer() {
+        return player;
+    }
+
+    public void RegisterPlayer(PlayerController player) {
+        this.player = player;
     }
 
     public GameObject GetHitbox(Vector3 position, Quaternion rotation, Transform parent = null, HitboxAnim animationID = HitboxAnim.DEFAULT) {
@@ -33,5 +43,5 @@ public class GameManager : Singleton<GameManager>
 }
 
 public enum HitboxAnim {
-    DEFAULT, PLAYER_SWORD, PLAYER_KNIFE
+    DEFAULT, PLAYER_SWORD, PLAYER_ARROW
 }
