@@ -1,4 +1,3 @@
-using BeauRoutine;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,7 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private Slider hpSlider;
     [SerializeField] private Slider summonSlider;
+    [SerializeField] private Image summonFill;
 
     [SerializeField] private float maxHp;
     private float currHp;
@@ -19,6 +19,8 @@ public class PlayerStats : MonoBehaviour
     public static float SUMMON_COST = 1;
     private bool dead = false;
 
+    [SerializeField] private Color summon_active;
+    [SerializeField] private Color summon_inactive;
 
     private void Awake()
     {
@@ -61,6 +63,12 @@ public class PlayerStats : MonoBehaviour
         return true;
     }
 
+    public void GainSP(float _spToGain)
+    {
+        currSp = Mathf.Min(maxSp, currSp + _spToGain);
+        UpdateSPSlider();
+    }
+
     private IEnumerator SummonRoutine()
     {
         yield return null;
@@ -76,6 +84,11 @@ public class PlayerStats : MonoBehaviour
 
     private void UpdateSPSlider()
     {
+        if (currSp < SUMMON_COST)
+            summonFill.color = summon_inactive;
+        else
+            summonFill.color = summon_active;
+
         summonSlider.value = currSp / maxSp;
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7746343187910039064}
   - component: {fileID: 458294557411828605}
   - component: {fileID: 6197445402748156525}
+  - component: {fileID: 4895448909385941677}
   m_Layer: 0
   m_Name: Enemy_Flier
   m_TagString: Untagged
@@ -51,11 +52,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprRend: {fileID: 458294557411828605}
+  anim: {fileID: 4895448909385941677}
   maxMoveSpeed: 5
   accelSpeed: 0.2
   frictionSpeed: 0.1
-  targDistToPlayer: 10
-  spinRadius: 2
+  targDistToPlayer: 8
+  spinRadius: 1.5
   attackCooldown: 1
 --- !u!114 &7746343187910039064
 MonoBehaviour:
@@ -149,6 +151,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &4895448909385941677
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84475163111822077}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae427000d72b6da40bd4d341c7a05b4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1001410535223658773
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,8 +323,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+      - m_Target: {fileID: 4675920113006844448}
+        m_TargetAssemblyTypeName: EnemyController_Flier, Assembly-CSharp
         m_MethodName: OnHit
         m_Mode: 1
         m_Arguments:

@@ -13,7 +13,7 @@ public class SaveData : Singleton<SaveData>
     public const string SAVE_KEY = "SaveData";
     public const int NUM_TOTAL_LEVELS = 12;
 
-    public void Start()
+    public void Awake()
     {
         LoadSaveData();
     }

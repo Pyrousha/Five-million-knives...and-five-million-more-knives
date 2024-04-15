@@ -53,10 +53,10 @@ public class Hookshot : MonoBehaviour
     {
         hookState = HookStateEnum.SPINNING;
 
-        movementHandler.ForceStop();
+        //movementHandler.ForceStop();
         jumpHandler.ForceLanding();
         jumpHandler.DisableGravity();
-        playerRB.velocity = Vector2.zero;
+        //playerRB.velocity = Vector2.zero;
 
         hookshotTransform.localPosition = Vector3.zero;
 
@@ -98,11 +98,18 @@ public class Hookshot : MonoBehaviour
 
     private IEnumerator SpinHookRoutine()
     {
+        Vector2 startVelocity = playerRB.velocity;
+        movementHandler.ForceStop();
+
         yield return Tween.Float(0, 1, (t) =>
         {
-            hookshotTransform.localScale = Vector3.one * t;
+            playerRB.velocity = Vector2.Lerp(startVelocity, Vector2.zero, Mathf.Sqrt(t));
+
+            hookshotTransform.localScale = Vector3.one * t * 2;
             hookshotTransform.localEulerAngles = new Vector3(0, 0, -90f + Mathf.Lerp(0, 360 + 90, t));
         }, hookSpinSpeed);
+
+        playerRB.velocity = Vector2.zero;
 
         ThrowHook();
     }

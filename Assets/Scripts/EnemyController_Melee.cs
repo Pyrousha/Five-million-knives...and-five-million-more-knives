@@ -1,23 +1,28 @@
-using BeauRoutine;
-using System.Collections;
 using UnityEngine;
 
 public class EnemyController_Melee : MonoBehaviour
 {
     private Rigidbody2D rb;
     private EnemyStats stats;
+    [SerializeField] private Animator anim;
+    [SerializeField] private SpriteRenderer sprRend;
 
+    [Space(10)]
     [SerializeField] private float maxMoveSpeed;
     [SerializeField] private float accelSpeed;
     [SerializeField] private float frictionSpeed;
     [SerializeField] private float gravSpeed;
-
-    [SerializeField] private SpriteRenderer sprRend;
+    [SerializeField] private float attackScootSpeedX;
+    [SerializeField] private float attackScootSpeedY;
+    [SerializeField] private float playerRangeX;
+    [SerializeField] private float playerRangeY;
 
     private Transform player;
 
     private bool actionable;
     private float endStun;
+
+    private float toPlayerDirX;
 
     private void Awake()
     {
@@ -37,11 +42,6 @@ public class EnemyController_Melee : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Time.time < endStun)
-            return;
-
-        float toPlayer = (player.position - transform.position).x;
-
         float currSpeed = rb.velocity.x;
         float currSpeedAbs = Mathf.Abs(currSpeed);
 
@@ -53,36 +53,49 @@ public class EnemyController_Melee : MonoBehaviour
         else if (currSpeed < 0)
             sprRend.flipX = true;
 
-        if (actionable && !stats.IsDead)
+        if (Time.time >= endStun)
         {
-            if (toPlayer < -1f)
-            {
-                //Try move left
+            anim.SetBool("IsBeingAttacked", false);
 
-                if (currSpeed > -maxMoveSpeed)
+            if (actionable && !stats.IsDead && Time.time >= endStun)
+            {
+                float toPlayer = (player.position - transform.position).x;
+
+                if (toPlayer < -playerRangeX)
                 {
-                    //Accelerate towards max
-                    currSpeed = Mathf.Max(-maxMoveSpeed, currSpeed - accelSpeed);
+                    //Try move left
+                    anim.SetBool("Moving", true);
+
+                    if (currSpeed > -maxMoveSpeed)
+                    {
+                        //Accelerate towards max
+                        currSpeed = Mathf.Max(-maxMoveSpeed, currSpeed - accelSpeed);
+                    }
                 }
-            }
-            else if (toPlayer > 1f)
-            {
-                //Try move right
-
-                if (currSpeed < maxMoveSpeed)
+                else if (toPlayer > playerRangeX)
                 {
-                    //Accelerate towards max
-                    currSpeed = Mathf.Min(maxMoveSpeed, currSpeed + accelSpeed);
+                    //Try move right
+                    anim.SetBool("Moving", true);
+
+                    if (currSpeed < maxMoveSpeed)
+                    {
+                        //Accelerate towards max
+                        currSpeed = Mathf.Min(maxMoveSpeed, currSpeed + accelSpeed);
+                    }
                 }
-            }
-            else
-            {
-                //Try attack player
-
-                if ((transform.position - player.position).magnitude < 3f)
+                else
                 {
-                    Routine.Start(this, AttackRoutine(new Vector3(toPlayer / Mathf.Abs(toPlayer) * 0.95f, 0, 0)));
-                    actionable = false;
+                    //Try attack player
+
+                    if (Mathf.Abs(transform.position.y - player.position.y) < playerRangeY)
+                    {
+                        anim.SetBool("Moving", false);
+                        anim.SetTrigger("Attack");
+
+                        toPlayerDirX = toPlayer / Mathf.Abs(toPlayer);
+
+                        actionable = false;
+                    }
                 }
             }
         }
@@ -90,23 +103,30 @@ public class EnemyController_Melee : MonoBehaviour
         rb.velocity = new Vector2(currSpeed, rb.velocity.y - gravSpeed);
     }
 
-    private IEnumerator AttackRoutine(Vector3 pos)
+    public void FireAttack()
     {
-        GameManager.Instance.CreateHitbox(new HitData(1))
-            .SetParent(transform)
-            .SetTeam(HitboxTeam.ENEMY)
-            .SetSize(new Vector2(2, 3))
-            .SetPos(pos + new Vector3(0, 1.5f, 0))
-            .SetDuration(0.5f)
-            .Build();
+        GameManager.Instance.CreateHitbox(new HitData() { damage = 1 })
+        .SetParent(transform)
+        .SetTeam(HitboxTeam.ENEMY)
+        .SetSize(new Vector2(2, 3))
+        .SetPos(new Vector3(toPlayerDirX, 1.5f, 0))
+        .SetDuration(0.25f)
+        .Build();
 
-        yield return 1;
-        actionable = true;
+        rb.velocity = new Vector2(attackScootSpeedX * toPlayerDirX, attackScootSpeedY);
     }
 
     public void OnHit()
     {
+
+
+        anim.SetBool("IsBeingAttacked", true);
         endStun = Time.time + 0.5f;
         rb.velocity = Vector2.zero;
+    }
+
+    public void EndAction()
+    {
+        actionable = true;
     }
 }

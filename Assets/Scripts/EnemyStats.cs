@@ -18,7 +18,7 @@ public class EnemyStats : MonoBehaviour
             return;
 
         currHp = Mathf.Max(0, currHp - data.damage);
-        Debug.Log("Get they ass");
+        //Debug.Log("Get they ass");
 
         if (currHp == 0)
         {

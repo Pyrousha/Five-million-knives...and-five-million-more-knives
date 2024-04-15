@@ -28,7 +28,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
     {
         Basic_Melee,
         Basic_Flier,
-        SEPHEREROOPHIII
+        Boss
     }
 
     [System.Serializable]

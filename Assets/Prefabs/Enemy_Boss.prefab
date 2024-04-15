@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2937186433375115350}
-  - component: {fileID: 3552194691168901870}
+  - component: {fileID: 8357666678916958667}
   - component: {fileID: 7746343187910039064}
   - component: {fileID: 716860975825016696}
   - component: {fileID: 458294557411828605}
   - component: {fileID: 6197445402748156525}
   - component: {fileID: 7980748003467233498}
   m_Layer: 0
-  m_Name: Enemy_Melee
+  m_Name: Enemy_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   - {fileID: 2801217979624239694}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3552194691168901870
+--- !u!114 &8357666678916958667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,19 +49,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 84475163111822077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9750d8309fddadf4da16e0f10f507bb7, type: 3}
+  m_Script: {fileID: 11500000, guid: a32982a147aabbb4692b5f09cd472cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7980748003467233498}
   sprRend: {fileID: 458294557411828605}
-  maxMoveSpeed: 8
-  accelSpeed: 1
-  frictionSpeed: 0.3
-  gravSpeed: 0.3
-  attackScootSpeedX: 15
-  attackScootSpeedY: 3
-  playerRangeX: 5
-  playerRangeY: 5
+  maxMoveSpeed: 0
+  accelSpeed: 0
+  frictionSpeed: 0
+  gravSpeed: 0
+  attackScootSpeedX: 0
+  attackScootSpeedY: 0
+  playerRangeX: 0
+  playerRangeY: 0
 --- !u!114 &7746343187910039064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2269024054055053545, guid: 1215799384439d047a8414c715b0b3d1, type: 3}
+  m_Sprite: {fileID: -8891964456459665560, guid: c848275d7bf37f7449db95c1029bbfc3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -182,7 +182,7 @@ Animator:
   m_GameObject: {fileID: 84475163111822077}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a188ac6f90f973042934b6bc49ec6d7a, type: 2}
+  m_Controller: {fileID: 9100000, guid: e3ea4cb5c2f256a4dbf1e71425587dda, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -304,7 +304,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.75}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -315,7 +315,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 3.5}
+  m_Size: {x: 3, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &8909525276758156938
 MonoBehaviour:
@@ -344,8 +344,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3552194691168901870}
-        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+      - m_Target: {fileID: 8357666678916958667}
+        m_TargetAssemblyTypeName: EnemyController_Boss, Assembly-CSharp
         m_MethodName: OnHit
         m_Mode: 1
         m_Arguments:
@@ -421,7 +421,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.75}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -432,5 +432,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 3.5}
+  m_Size: {x: 3, y: 6}
   m_EdgeRadius: 0

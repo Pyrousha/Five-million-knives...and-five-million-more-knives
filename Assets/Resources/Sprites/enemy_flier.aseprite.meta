@@ -121,7 +121,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: enemy_flier_Frame_0
     originalName: 
-    pivot: {x: 0.4615385, y: 0.31578946}
+    pivot: {x: 0.53846157, y: 0.31578946}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -141,7 +141,7 @@ ScriptedImporter:
     uvTransform: {x: 38, y: 61}
   - name: enemy_flier_Frame_1
     originalName: 
-    pivot: {x: 0.4615385, y: 0.3478261}
+    pivot: {x: 0.53846157, y: 0.3478261}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -181,7 +181,7 @@ ScriptedImporter:
     uvTransform: {x: 74, y: 56}
   - name: enemy_flier_Frame_3
     originalName: 
-    pivot: {x: 0.46428573, y: 0.3125}
+    pivot: {x: 0.5357143, y: 0.3125}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -201,7 +201,7 @@ ScriptedImporter:
     uvTransform: {x: 74, y: 80}
   - name: enemy_flier_Frame_4
     originalName: 
-    pivot: {x: 0.4615385, y: 0.31578946}
+    pivot: {x: 0.53846157, y: 0.31578946}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -221,7 +221,7 @@ ScriptedImporter:
     uvTransform: {x: 38, y: 88}
   - name: enemy_flier_Frame_5
     originalName: 
-    pivot: {x: 0.6428572, y: 0.35714287}
+    pivot: {x: 0.35714287, y: 0.35714287}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -241,7 +241,7 @@ ScriptedImporter:
     uvTransform: {x: 110, y: 56}
   - name: enemy_flier_Frame_6
     originalName: 
-    pivot: {x: 0.6923077, y: 0.35714287}
+    pivot: {x: 0.30769232, y: 0.35714287}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -281,7 +281,7 @@ ScriptedImporter:
     uvTransform: {x: 38, y: 4}
   - name: enemy_flier_Frame_8
     originalName: 
-    pivot: {x: 0.51724136, y: 0.15789473}
+    pivot: {x: 0.4827586, y: 0.15789473}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -301,7 +301,7 @@ ScriptedImporter:
     uvTransform: {x: 74, y: 4}
   - name: enemy_flier_Frame_9
     originalName: 
-    pivot: {x: 0.516129, y: 0.11764706}
+    pivot: {x: 0.48387095, y: 0.11764706}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -351,7 +351,7 @@ ScriptedImporter:
     - name: enemy_flier_Frame_0
       frameIndex: 0
       cellRect:
-        x: 4
+        x: 2
         y: 10
         width: 26
         height: 19
@@ -359,7 +359,7 @@ ScriptedImporter:
     - name: enemy_flier_Frame_1
       frameIndex: 1
       cellRect:
-        x: 4
+        x: 2
         y: 8
         width: 26
         height: 23
@@ -375,7 +375,7 @@ ScriptedImporter:
     - name: enemy_flier_Frame_3
       frameIndex: 3
       cellRect:
-        x: 3
+        x: 1
         y: 11
         width: 28
         height: 16
@@ -383,7 +383,7 @@ ScriptedImporter:
     - name: enemy_flier_Frame_4
       frameIndex: 4
       cellRect:
-        x: 4
+        x: 2
         y: 10
         width: 26
         height: 19
@@ -391,7 +391,7 @@ ScriptedImporter:
     - name: enemy_flier_Frame_5
       frameIndex: 5
       cellRect:
-        x: 7
+        x: 11
         y: 11
         width: 14
         height: 14
@@ -399,7 +399,7 @@ ScriptedImporter:
     - name: enemy_flier_Frame_6
       frameIndex: 6
       cellRect:
-        x: 7
+        x: 12
         y: 11
         width: 13
         height: 14
@@ -415,7 +415,7 @@ ScriptedImporter:
     - name: enemy_flier_Frame_8
       frameIndex: 8
       cellRect:
-        x: 1
+        x: 2
         y: 13
         width: 29
         height: 19
@@ -423,7 +423,7 @@ ScriptedImporter:
     - name: enemy_flier_Frame_9
       frameIndex: 9
       cellRect:
-        x: 0
+        x: 1
         y: 14
         width: 31
         height: 17
