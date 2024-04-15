@@ -55,12 +55,14 @@ public struct HitboxData
         return this;
     }
 
-    public HitboxData SetAnimation(HitboxAnim anim) {
+    public HitboxData SetAnimation(HitboxAnim anim)
+    {
         this.anim = anim;
         return this;
     }
 
-    public HitboxData SetVelocity(Vector2 velocity) {
+    public HitboxData SetVelocity(Vector2 velocity)
+    {
         this.velocity = velocity;
         return this;
     }
@@ -88,9 +90,4 @@ public struct HitboxData
 public struct HitData
 {
     public int damage;
-
-    public HitData(int damage)
-    {
-        this.damage = damage;
-    }
 }

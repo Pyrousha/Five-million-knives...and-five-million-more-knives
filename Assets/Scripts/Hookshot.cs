@@ -53,10 +53,10 @@ public class Hookshot : MonoBehaviour
     {
         hookState = HookStateEnum.SPINNING;
 
-        movementHandler.ForceStop();
+        //movementHandler.ForceStop();
         jumpHandler.ForceLanding();
         jumpHandler.DisableGravity();
-        playerRB.velocity = Vector2.zero;
+        //playerRB.velocity = Vector2.zero;
 
         hookshotTransform.localPosition = Vector3.zero;
 

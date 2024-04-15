@@ -1,5 +1,3 @@
-using BeauRoutine;
-using System.Collections;
 using UnityEngine;
 
 public class EnemyController_Flier : MonoBehaviour
@@ -7,6 +5,7 @@ public class EnemyController_Flier : MonoBehaviour
     private Rigidbody2D rb;
     private EnemyStats stats;
     [SerializeField] private SpriteRenderer sprRend;
+    [SerializeField] private Animator anim;
 
     [Space(10)]
 
@@ -20,6 +19,7 @@ public class EnemyController_Flier : MonoBehaviour
     private float currAttackCooldown;
 
     private static float attackWaitTime = 0.25f;
+    private Vector2 toPlayer;
 
     private Transform player;
 
@@ -51,59 +51,64 @@ public class EnemyController_Flier : MonoBehaviour
         velocity_local_friction = velocity_local_friction.normalized * Mathf.Max(0, velocity_local_friction.magnitude - frictionSpeed);
         Vector2 updatedVelocity = velocity_local_friction;
 
-        if (actionable && !stats.IsDead && Time.time >= endStun)
+        if (Time.time >= endStun)
         {
-            Vector2 toPlayer = (player.position - transform.position);
+            anim.SetBool("IsBeingAttacked", false);
 
-            float targToPlayer = toPlayer.magnitude - targDistToPlayer;
-            Vector2 targDir = toPlayer.normalized * targToPlayer;
-            targDir += new Vector2(Mathf.Sin(Time.time), Mathf.Cos(Time.time)) * spinRadius;
-
-            Vector2 velocity_with_input = velocity_local_friction + targDir * accelSpeed;
-
-            if (velocity_local_friction.magnitude <= maxMoveSpeed)
+            if (actionable && !stats.IsDead)
             {
-                //under max speed, accelerate towards max speed
-                updatedVelocity = velocity_with_input.normalized * Mathf.Min(maxMoveSpeed, velocity_with_input.magnitude);
-            }
-            else
-            {
-                float velocityOntoInput = Vector3.Project(velocity_with_input, targDir).magnitude;
-                if (Vector3.Dot(velocity_with_input, targDir) < 0)
-                    velocityOntoInput *= -1;
+                toPlayer = (player.position - transform.position);
 
-                //Debug.Log(velocityOntoInput);
-                if (velocityOntoInput <= maxMoveSpeed)
+                float targToPlayer = toPlayer.magnitude - targDistToPlayer;
+                Vector2 targDir = toPlayer.normalized * targToPlayer;
+                targDir += new Vector2(Mathf.Sin(Time.time), Mathf.Cos(Time.time)) * spinRadius;
+
+                Vector2 velocity_with_input = velocity_local_friction + targDir * accelSpeed;
+
+                if (velocity_local_friction.magnitude <= maxMoveSpeed)
                 {
-                    //Speed in direction of input lower than maxSpeed
-                    updatedVelocity = velocity_with_input;
+                    //under max speed, accelerate towards max speed
+                    updatedVelocity = velocity_with_input.normalized * Mathf.Min(maxMoveSpeed, velocity_with_input.magnitude);
                 }
                 else
                 {
-                    //Would accelerate more, so don't user player input directly
+                    float velocityOntoInput = Vector3.Project(velocity_with_input, targDir).magnitude;
+                    if (Vector3.Dot(velocity_with_input, targDir) < 0)
+                        velocityOntoInput *= -1;
 
-                    Vector3 velocityOntoFriction = Vector3.Project(velocity_local_friction, targDir);
+                    //Debug.Log(velocityOntoInput);
+                    if (velocityOntoInput <= maxMoveSpeed)
+                    {
+                        //Speed in direction of input lower than maxSpeed
+                        updatedVelocity = velocity_with_input;
+                    }
+                    else
+                    {
+                        //Would accelerate more, so don't user player input directly
 
-                    Vector3 perp = (Vector3)velocity_local_friction - velocityOntoFriction;
+                        Vector3 velocityOntoFriction = Vector3.Project(velocity_local_friction, targDir);
 
-                    //Accelerate towards max speed
-                    float amountToAdd = Mathf.Max(0, Mathf.Min(maxMoveSpeed - velocityOntoFriction.magnitude, targDir.magnitude));
-                    float perpAmountToSubtract = Mathf.Max(0, Mathf.Min(accelSpeed - amountToAdd, perp.magnitude));
+                        Vector3 perp = (Vector3)velocity_local_friction - velocityOntoFriction;
 
-                    perp = perp.normalized * perpAmountToSubtract;
+                        //Accelerate towards max speed
+                        float amountToAdd = Mathf.Max(0, Mathf.Min(maxMoveSpeed - velocityOntoFriction.magnitude, targDir.magnitude));
+                        float perpAmountToSubtract = Mathf.Max(0, Mathf.Min(accelSpeed - amountToAdd, perp.magnitude));
 
-                    updatedVelocity = (velocity_local_friction + amountToAdd * targDir.normalized - (Vector2)perp);
+                        perp = perp.normalized * perpAmountToSubtract;
+
+                        updatedVelocity = (velocity_local_friction + amountToAdd * targDir.normalized - (Vector2)perp);
+                    }
                 }
-            }
 
-            currAttackCooldown -= Time.fixedDeltaTime;
-            if (currAttackCooldown <= 0)
-            {
-                //Attack player
-                Routine.Start(this, AttackRoutine(toPlayer));
-                actionable = false;
+                currAttackCooldown -= Time.fixedDeltaTime;
+                if (currAttackCooldown <= 0)
+                {
+                    anim.SetTrigger("Attack");
 
-                currAttackCooldown = attackCooldown - attackWaitTime;
+                    actionable = false;
+
+                    currAttackCooldown = attackCooldown - attackWaitTime;
+                }
             }
         }
 
@@ -115,27 +120,31 @@ public class EnemyController_Flier : MonoBehaviour
             sprRend.flipX = true;
     }
 
-    private IEnumerator AttackRoutine(Vector2 _dir)
+    public void FireAttack()
     {
-        _dir.Normalize();
+        toPlayer.Normalize();
 
+        //Attack player
         GameManager.Instance.CreateHitbox(new HitData() { damage = 1 })
-        .SetPos((Vector2)transform.position + 1 * _dir)
+        .SetPos((Vector2)transform.position + 1 * toPlayer)
         .SetAnimation(HitboxAnim.ENEMY_PROJECTILE)
-        .SetRotation(new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan2(_dir.y, _dir.x)))
+        .SetRotation(new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan2(toPlayer.y, toPlayer.x)))
         .SetTeam(HitboxTeam.ENEMY)
         .SetSize(new(1, 1))
         .SetDuration(0.5f)
-        .SetVelocity(30 * _dir)
+        .SetVelocity(30 * toPlayer)
         .Build();
-
-        yield return attackWaitTime;
-        actionable = true;
     }
 
     public void OnHit()
     {
+        anim.SetBool("IsBeingAttacked", true);
         endStun = Time.time + 0.5f;
         rb.velocity = Vector2.zero;
+    }
+
+    public void EndAction()
+    {
+        actionable = true;
     }
 }

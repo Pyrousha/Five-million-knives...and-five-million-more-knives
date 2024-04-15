@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         else if ((!acting || cancellable) && InputHandler.Instance.Grapple.pressed)
         {
             StartAction();
-            
+
 
             Vector2 toMouse = Utils.GetMouseDir(transform.position);
             sprite.flipX = toMouse.x < 0;
@@ -159,13 +159,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void FireAttack() {
+    public void FireAttack()
+    {
         var toMouse = Utils.GetMouseDir(transform.position);
 
 
-        switch (currentWeapon) {
+        switch (currentWeapon)
+        {
             case WeaponType.SWORD:
-                GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+                GameManager.Instance.CreateHitbox(new HitData() { damage = 1 })
                     .SetPos((Vector2)transform.position + 3 * toMouse)
                     .SetAnimation(HitboxAnim.PLAYER_SWORD)
                     .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles)
@@ -175,7 +177,7 @@ public class PlayerController : MonoBehaviour
                     .Build();
                 break;
             case WeaponType.ARROW:
-                GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+                GameManager.Instance.CreateHitbox(new HitData() { damage = 1 })
                     .SetPos((Vector2)transform.position + 1 * toMouse)
                     .SetAnimation(HitboxAnim.PLAYER_ARROW)
                     .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles)
@@ -184,7 +186,7 @@ public class PlayerController : MonoBehaviour
                     .SetDuration(0.5f)
                     .SetVelocity(30 * toMouse)
                     .Build();
-                GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+                GameManager.Instance.CreateHitbox(new HitData() { damage = 1 })
                     .SetPos((Vector2)transform.position + 1 * toMouse)
                     .SetAnimation(HitboxAnim.PLAYER_ARROW)
                     .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles + 10 * Vector3.forward)
@@ -193,7 +195,7 @@ public class PlayerController : MonoBehaviour
                     .SetDuration(0.5f)
                     .SetVelocity(Quaternion.Euler(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles + 10 * Vector3.forward) * (30 * Vector2.right))
                     .Build();
-                GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+                GameManager.Instance.CreateHitbox(new HitData() { damage = 1 })
                     .SetPos((Vector2)transform.position + 1 * toMouse)
                     .SetAnimation(HitboxAnim.PLAYER_ARROW)
                     .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles - 10 * Vector3.forward)
@@ -204,8 +206,6 @@ public class PlayerController : MonoBehaviour
                     .Build();
                 break;
         }
-
-
     }
 
     public void FireGrapple() {
@@ -215,6 +215,7 @@ public class PlayerController : MonoBehaviour
 
     public void PickupWeapon(WeaponType type) {
         this.currentWeapon = type;
+        playerStats.GainSP(0.5f);
     }
 
     public void EndGrapple() {
@@ -222,6 +223,7 @@ public class PlayerController : MonoBehaviour
     }
 }
 
-public enum WeaponType {
+public enum WeaponType
+{
     NONE, SWORD, ARROW, MAX
 }
