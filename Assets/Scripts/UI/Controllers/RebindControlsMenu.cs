@@ -1,3 +1,4 @@
+using BeauRoutine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -184,7 +185,7 @@ public class RebindControlsMenu : Submenu
 
         playerInput.SwitchCurrentActionMap("Gameplay");
 
-        StartCoroutine(ReloadRoutine());
+        Routine.Start(ReloadRoutine());
     }
 
     private IEnumerator ReloadRoutine()

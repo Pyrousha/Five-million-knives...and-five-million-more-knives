@@ -16,15 +16,20 @@ public class EnemyController : MonoBehaviour
 
     private bool actionable;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         stats = GetComponent<EnemyStats>();
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         player = PlayerController.Instance.transform;
 
         actionable = true;
+
+        EnemySpawner.Instance.OnEnemySpawned();
     }
 
     private void FixedUpdate()
@@ -62,8 +67,12 @@ public class EnemyController : MonoBehaviour
             else
             {
                 //Try attack player
-                Routine.Start(this, AttackRoutine(new Vector3(toPlayer / Mathf.Abs(toPlayer) * 0.95f, 0, 0)));
-                actionable = false;
+
+                if ((transform.position - player.position).magnitude < 1f)
+                {
+                    Routine.Start(this, AttackRoutine(new Vector3(toPlayer / Mathf.Abs(toPlayer) * 0.95f, 0, 0)));
+                    actionable = false;
+                }
             }
         }
 

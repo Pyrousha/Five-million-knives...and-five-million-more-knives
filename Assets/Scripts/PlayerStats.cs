@@ -17,6 +17,8 @@ public class PlayerStats : MonoBehaviour
     private float currSp;
 
     private static float summonCost = 1;
+    private bool dead = false;
+
 
     private void Awake()
     {
@@ -35,12 +37,16 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float _dmg)
     {
+        if (dead)
+            return;
+
         currHp = Mathf.Max(0, currHp - _dmg);
         UpdateHPSlider();
 
         if (currHp == 0)
         {
-            Debug.Log("THEN PERISH.");
+            dead = true;
+            GameplayPopupController.Instance.OnPlayerDeath();
         }
     }
 

@@ -1,3 +1,4 @@
+using BeauRoutine;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -83,13 +84,13 @@ public class PauseMenuCanvas : Submenu
         parent.SetActive(false);
         Time.timeScale = 1;
 
-        StartCoroutine(ClosePopupRoutine());
+        Routine.Start(this, ClosePopupRoutine());
     }
 
     private IEnumerator ClosePopupRoutine()
     {
         yield return null;
-        yield return new WaitForSeconds(0.1f);
+        yield return 0.1f;
 
         IsOpen = false;
     }

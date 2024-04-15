@@ -1,3 +1,4 @@
+using BeauRoutine;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -52,16 +53,21 @@ public class SceneTransitioner : Singleton<SceneTransitioner>
         LoadSceneWithIndex(MAIN_MENU_INDEX);
     }
 
+    public void ReloadCurrScene()
+    {
+        LoadSceneWithIndex(CurrBuildIndex);
+    }
+
     public void LoadSceneWithIndex(int _index)
     {
-        StartCoroutine(LoadSceneRoutine(_index));
+        Routine.Start(this, LoadSceneRoutine(_index));
     }
     private IEnumerator LoadSceneRoutine(int _index)
     {
         anim.ResetTrigger("ToClear");
         anim.SetTrigger("ToBlack");
 
-        yield return new WaitForSeconds(FADE_ANIM_DURATION);
+        yield return FADE_ANIM_DURATION;
 
         LevelFinished = false;
         SceneManager.LoadScene(_index);
