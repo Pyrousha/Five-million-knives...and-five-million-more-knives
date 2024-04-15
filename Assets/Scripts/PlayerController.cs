@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerController : Singleton<PlayerController>
 {
     [SerializeField] private Rigidbody2D rbody;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private GroundedCheck ground;
     [SerializeField] private MovementHandler movement;
     [SerializeField] private JumpHandler jump;
@@ -28,6 +30,7 @@ public class PlayerController : Singleton<PlayerController>
         UpdateInteractables();
 
         grounded = ground.CheckGrounded();
+        animator.SetBool("grounded", grounded);
 
         HandleInputs();
     }
@@ -37,13 +40,20 @@ public class PlayerController : Singleton<PlayerController>
         if (!acting && InputHandler.Instance.Move.pressed)
         {
             movement.StartAcceleration(InputHandler.Instance.Dir);
+            animator.SetBool("running", true);
+            if (InputHandler.Instance.Dir != 0)
+                sprite.flipX = InputHandler.Instance.Dir < 0;
         }
         else if (!acting && InputHandler.Instance.Move.down)
         {
             movement.UpdateMovement(InputHandler.Instance.Dir);
+            animator.SetBool("running", true);
+            if (InputHandler.Instance.Dir != 0)
+                sprite.flipX = InputHandler.Instance.Dir < 0;
         }
         else if (!acting)
         {
+            animator.SetBool("running", false);
             movement.StartDeceleration();
         }
 
@@ -59,22 +69,32 @@ public class PlayerController : Singleton<PlayerController>
 
         if ((!acting || cancellable) && InputHandler.Instance.Attack.pressed)
         {
+            StartAction();
+            movement.StartDeceleration();
+            animator.SetTrigger("attack");
+            Vector2 toMouse = ((Vector2)(Camera.main.ScreenToWorldPoint(InputHandler.Instance.MousePos) - transform.position)).normalized;
+            sprite.flipX = toMouse.x < 0;
 
         }
         else if ((!acting || cancellable) && InputHandler.Instance.Grapple.pressed)
         {
-            hookshot.StartHookshot();
             StartAction();
-        }
+            
 
-        if ((!acting || cancellable) && InputHandler.Instance.Summon.pressed)
+            Vector2 toMouse = Utils.GetMouseDir(transform.position);
+            sprite.flipX = toMouse.x < 0;
+
+            hookshot.StartHookshot();
+        }
+        else if ((!acting || cancellable) && InputHandler.Instance.Summon.pressed)
         {
-            if (playerStats.TrySummon())
-                StartAction();
+            StartAction();
+            playerStats.TrySummon();
         }
     }
     public void StartAction()
     {
+        animator.SetBool("running", false);
         acting = true;
     }
 
@@ -129,5 +149,19 @@ public class PlayerController : Singleton<PlayerController>
             focusedInteract = newFocus;
             focusedInteract?.Focus();
         }
+    }
+
+    public void FireAttack() {
+        var toMouse = Utils.GetMouseDir(transform.position);
+
+        GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+            .SetPos((Vector2)transform.position + 3 * toMouse)
+            .SetAnimation(HitboxAnim.PLAYER_SWORD)
+            .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles)
+            .SetTeam(HitboxTeam.PLAYER)
+            .SetSize(new(6, 2))
+            .SetDuration(HitboxData.MATCH_ANIM_DURATION)
+            .Build();
+
     }
 }

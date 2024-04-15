@@ -10,9 +10,10 @@ public class EnemyStats : MonoBehaviour
         currHp = maxHp;
     }
 
-    public void TakeDamage(float _dmg)
+    public void TakeDamage(HitData data)
     {
-        currHp = Mathf.Max(0, currHp - _dmg);
+        currHp = Mathf.Max(0, currHp - data.damage);
+        Debug.Log("Get they ass");
 
         if (currHp == 0)
         {

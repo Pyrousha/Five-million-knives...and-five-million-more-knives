@@ -2,6 +2,8 @@ using UnityEngine;
 
 public struct HitboxData
 {
+    public static float MATCH_ANIM_DURATION = -1;
+    private HitboxAnim anim;
     private HitboxTeam team;
     private Transform parent;
     private Vector3 pos;
@@ -52,9 +54,14 @@ public struct HitboxData
         return this;
     }
 
+    public HitboxData SetAnimation(HitboxAnim anim) {
+        this.anim = anim;
+        return this;
+    }
+
     public void Build()
     {
-        var box = GameManager.Instance.GetHitbox(pos, rotation, parent);
+        var box = GameManager.Instance.GetHitbox(pos, rotation, parent, anim);
         box.GetComponent<HitboxController>().Setup(team, hitData);
 
         if (hitboxSize != default(Vector2))
@@ -62,6 +69,8 @@ public struct HitboxData
 
         if (duration != 0)
         {
+            if (duration == MATCH_ANIM_DURATION)
+                duration = box.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length - 0.05f;
             box.AddComponent<DestroyAfterDelay>().Init(duration);
         }
     }

@@ -51,13 +51,13 @@ public class InputHandler : Singleton<InputHandler>
     private Queue<Dictionary<short, short>> inputBuffer = new Queue<Dictionary<short, short>>();
     private Dictionary<short, short> currentFrame;
 
-    public void Start()
+    public void Awake()
     {
         buttons = new ButtonState[buttonCount];
         for (int i = 0; i < buttonCount; i++)
             buttons[i].Init(ref IDSRC, this);
 
-        if (SaveData.CurrSaveData.reboundControls != null)
+        if (SaveData.CurrSaveData != null && SaveData.CurrSaveData.reboundControls != null)
             GetComponent<PlayerInput>().actions.LoadBindingOverridesFromJson(SaveData.CurrSaveData.reboundControls);
     }
 

@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     private Transform player;
 
     private bool actionable;
+    private float endStun;
 
     private void Awake()
     {
@@ -34,6 +35,9 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Time.time < endStun)
+            return;
+
         float toPlayer = (player.position - transform.position).x;
 
         float currSpeed = rb.velocity.x;
@@ -91,5 +95,10 @@ public class EnemyController : MonoBehaviour
 
         yield return 1;
         actionable = true;
+    }
+
+    public void OnHit() {
+        endStun = Time.time + 0.5f;
+        rb.velocity = Vector2.zero;
     }
 }
