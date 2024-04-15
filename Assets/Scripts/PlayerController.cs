@@ -20,6 +20,8 @@ public class PlayerController : Singleton<PlayerController>
     private bool cancellable;
     private bool parrying;
 
+    private WeaponType currentWeapon = WeaponType.KNIFE;
+
     void Start()
     {
 
@@ -154,14 +156,53 @@ public class PlayerController : Singleton<PlayerController>
     public void FireAttack() {
         var toMouse = Utils.GetMouseDir(transform.position);
 
-        GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
-            .SetPos((Vector2)transform.position + 3 * toMouse)
-            .SetAnimation(HitboxAnim.PLAYER_SWORD)
-            .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles)
-            .SetTeam(HitboxTeam.PLAYER)
-            .SetSize(new(6, 2))
-            .SetDuration(HitboxData.MATCH_ANIM_DURATION)
-            .Build();
+
+        switch (currentWeapon) {
+            case WeaponType.SWORD:
+                GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+                    .SetPos((Vector2)transform.position + 3 * toMouse)
+                    .SetAnimation(HitboxAnim.PLAYER_SWORD)
+                    .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles)
+                    .SetTeam(HitboxTeam.PLAYER)
+                    .SetSize(new(6, 2))
+                    .SetDuration(HitboxData.MATCH_ANIM_DURATION)
+                    .Build();
+                break;
+            case WeaponType.KNIFE:
+                GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+                    .SetPos((Vector2)transform.position + 1 * toMouse)
+                    .SetAnimation(HitboxAnim.PLAYER_KNIFE)
+                    .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles)
+                    .SetTeam(HitboxTeam.PLAYER)
+                    .SetSize(new(1, 1))
+                    .SetDuration(0.5f)
+                    .SetVelocity(30 * toMouse)
+                    .Build();
+                GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+                    .SetPos((Vector2)transform.position + 1 * toMouse)
+                    .SetAnimation(HitboxAnim.PLAYER_KNIFE)
+                    .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles + 10 * Vector3.forward)
+                    .SetTeam(HitboxTeam.PLAYER)
+                    .SetSize(new(1, 1))
+                    .SetDuration(0.5f)
+                    .SetVelocity(Quaternion.Euler(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles + 10 * Vector3.forward) * (30 * Vector2.right))
+                    .Build();
+                GameManager.Instance.CreateHitbox(new HitData() {damage = 1})
+                    .SetPos((Vector2)transform.position + 1 * toMouse)
+                    .SetAnimation(HitboxAnim.PLAYER_KNIFE)
+                    .SetRotation(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles - 10 * Vector3.forward)
+                    .SetTeam(HitboxTeam.PLAYER)
+                    .SetSize(new(1, 1))
+                    .SetDuration(0.5f)
+                    .SetVelocity(Quaternion.Euler(Quaternion.FromToRotation(Vector2.right, toMouse).eulerAngles - 10 * Vector3.forward) * (30 * Vector2.right))
+                    .Build();
+                break;
+        }
+
 
     }
+}
+
+public enum WeaponType {
+    NONE, SWORD, KNIFE
 }

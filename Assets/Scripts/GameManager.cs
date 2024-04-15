@@ -33,5 +33,5 @@ public class GameManager : Singleton<GameManager>
 }
 
 public enum HitboxAnim {
-    DEFAULT, PLAYER_SWORD
+    DEFAULT, PLAYER_SWORD, PLAYER_KNIFE
 }

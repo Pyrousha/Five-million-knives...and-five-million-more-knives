@@ -10,6 +10,7 @@ public struct HitboxData
     private Quaternion rotation;
     private HitData hitData;
     private Vector2 hitboxSize;
+    private Vector2 velocity;
     private float duration;
 
     public HitboxData SetHitData(HitData data)
@@ -59,6 +60,11 @@ public struct HitboxData
         return this;
     }
 
+    public HitboxData SetVelocity(Vector2 velocity) {
+        this.velocity = velocity;
+        return this;
+    }
+
     public void Build()
     {
         var box = GameManager.Instance.GetHitbox(pos, rotation, parent, anim);
@@ -73,6 +79,9 @@ public struct HitboxData
                 duration = box.GetComponent<Animator>().runtimeAnimatorController.animationClips[0].length - 0.05f;
             box.AddComponent<DestroyAfterDelay>().Init(duration);
         }
+
+        if (velocity != Vector2.zero)
+            box.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 }
 
