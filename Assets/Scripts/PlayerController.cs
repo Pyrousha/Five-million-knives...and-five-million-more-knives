@@ -87,17 +87,20 @@ public class PlayerController : MonoBehaviour
             Vector2 toMouse = Utils.GetMouseDir(transform.position);
             sprite.flipX = toMouse.x < 0;
 
-            hookshot.StartHookshot();
+            animator.SetTrigger("grapple");
+            parrying = true;
         }
         else if ((!acting || cancellable) && InputHandler.Instance.Summon.pressed && playerStats.TryConsumeStamina(PlayerStats.SUMMON_COST))
         {
             //StartAction();
+            cancellable = false;
             Instantiate(summonPrefab, new Vector2(Random.Range(-10, 0), Random.Range(4, 6)), Quaternion.identity);
             Instantiate(summonPrefab, new Vector2(Random.Range(0, 11), Random.Range(4, 6)), Quaternion.identity);
         }
     }
     public void StartAction()
     {
+        cancellable = false;
         animator.SetBool("running", false);
         acting = true;
     }
@@ -114,6 +117,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("lol. lmao even");
             movement.Pause(0.5f);
             jump.Pause(0.5f);
+            cancellable = true;
             return;
         }
         Debug.Log("Yeouch!");
@@ -204,8 +208,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void FireGrapple() {
+        parrying = false;
+        hookshot.StartHookshot();
+    }
+
     public void PickupWeapon(WeaponType type) {
         this.currentWeapon = type;
+    }
+
+    public void EndGrapple() {
+        animator.SetTrigger("end_grapple");
     }
 }
 

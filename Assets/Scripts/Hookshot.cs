@@ -60,9 +60,7 @@ public class Hookshot : MonoBehaviour
 
         hookshotTransform.localPosition = Vector3.zero;
 
-        //Start hookshot spin
-        spinHookRoutine.Stop();
-        spinHookRoutine = Routine.Start(this, SpinHookRoutine());
+        ThrowHook();
     }
 
     private void ThrowHook()
@@ -94,17 +92,6 @@ public class Hookshot : MonoBehaviour
     {
         lineRend.SetPosition(0, playerCenter.position);
         lineRend.SetPosition(1, hookshotBottom.position);
-    }
-
-    private IEnumerator SpinHookRoutine()
-    {
-        yield return Tween.Float(0, 1, (t) =>
-        {
-            hookshotTransform.localScale = Vector3.one * t;
-            hookshotTransform.localEulerAngles = new Vector3(0, 0, -90f + Mathf.Lerp(0, 360 + 90, t));
-        }, hookSpinSpeed);
-
-        ThrowHook();
     }
 
     private IEnumerator ThrowHookRoutine(Vector2 _target, bool _hitTarget)
@@ -152,6 +139,6 @@ public class Hookshot : MonoBehaviour
         }
 
         hookshotTransform.localPosition = Vector3.zero;
-        playerController.EndAction();
+        playerController.EndGrapple();
     }
 }
